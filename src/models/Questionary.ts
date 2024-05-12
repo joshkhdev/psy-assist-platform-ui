@@ -1,4 +1,8 @@
 export interface Questionary {
+    contactTelegram: string;
+    contactEmail: string;
+    contactPhone: string;
+
     name: string;
     pronouns: string;
     age: number | undefined;
@@ -9,4 +13,6 @@ export interface Questionary {
     psyRequest: string;
     therapyExperience: string;
     isForPay: boolean;
+
+    registrationDate: string;
 }

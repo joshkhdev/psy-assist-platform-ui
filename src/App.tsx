@@ -7,6 +7,7 @@ import {
   BrowserRouter
 } from "react-router-dom";
 import NoContent from './components/NoContent';
+import QuestionarySuccess from './components/QuestionarySuccess';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path='/' element={<Home />} />
               {/* подстановочный путь */}
               <Route path="createQuestionary" element={<QuestionaryCreator />} />
+              <Route path='createQuestionarySuccess' element={<QuestionarySuccess />} />
               <Route path='*' element={<NoContent />} />
             </Routes>
           </BrowserRouter>

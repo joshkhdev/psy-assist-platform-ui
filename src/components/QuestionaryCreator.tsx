@@ -1,62 +1,47 @@
+// System
+import axios from 'axios';
+import Moment from 'moment';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
+// MUI
 import { Button, Link, TextField, Typography, FormControlLabel, Checkbox, FormControl } from "@mui/material";
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Questionary } from '../models/questionary';
+import { MuiTelInput } from "mui-tel-input";
+
+// App
+import { Questionary } from '../models/Questionary';
+import { questionaryFormStyle, questionaryEntryStyle, questionaryButtonStyle } from '../styles/QuestionaryStyles';
+import { aboutHeaderOuter, ageHeaderInner, backToHomeButtonHeader, contactsHeaderOuter, eMailHeaderInner, isForPayCheckBoxHeader, isForPayHeader, mentalSpecHeaderInner, nameHeaderInner, nameHeaderOuter, neuroDiffHeaderInner, phoneHeaderInner, pronounHeaderInner, psyRequestHeaderInner, psyRequestHeaderOuter, psyWishAttentionHeaderInner, psyWishesHeaderInner, psyWishesHeaderOuter, psyWishesPlaceholder, questionaryCreateHeader, sendButtonHeader, telegramHeaderInner, therapyExpHeaderInner, therapyExpHeaderOuter, timezoneHeaderInner } from '../resources/QuestionaryCreatorResources';
 
 const QuestionaryCreator = () => {   
-
     // Constants
-    const nameHeaderOuter = "Как вас зовут и какие местоимения вы используете?";
-    const nameHeaderInner = "Напишите ваше имя";
-    const pronounHeaderInner = "Как к вам обращаться (местоимение)";
-    const aboutHeaderOuter = "Расскажите о себе";
-    const ageHeaderInner = "Сколько вам полных лет?" ;
-    const timezoneHeaderInner = "В каком часовом поясе вы живете?";
-    const neuroDiffHeaderInner = "Какие у вас нейроотличия?" ;
-    const mentalSpecHeaderInner = "Есть ли у вас другие ментальные особенности / растройства / другие состояния, о которых психологу будет важно знать?";
-    const psyWishesHeaderOuter = "Укажите ваши предпочтения по психологам";
-    const psyWishesHeaderInner = "Есть ли у вас предпочтение по тому, с кем из наших психологов вы будете работать? Вы также можете указать не имя специалиста, а другие параметры, которые для вас важны.";
-    const psyWishAttentionHeaderInner = "Обращаем ваше внимание, что мы не можем гарантировать запись к конкретному психологу, но постараемся учесть ваши пожелания.";
-    const psyWishesPlaceholder = "Например, вы хотите, чтобы консультации проводила женщина или специалист с определенным подходом";
-    const psyRequestHeaderOuter = "Пожалуйста, сформулируйте ваш запрос";
-    const psyRequestHeaderInner = "С какими трудностями вы сталкиваетесь?";
-    const therapyExpHeaderOuter = "Опыт посещения психолога";
-    const therapyExpHeaderInner = "Был ли у вас опыт прохождения психотерапии и/или посещения психолога?";
-    const isForPayHeader = "Если вы готовы с самого начала заниматься с психологом платно, отметьте этот пункт:";
-    const isForPayCheckBoxHeader = "Готов заниматься платно";
-
-    // Styles
-    const registrationFormStyle = {
-        padding: "50px",
-        background: "#f5f5f5",
-        width: "70%",
-        textAlign: "left"
-    };
-
-    const entryStyle = {
-        backgroundColor: "#ffffff",
-        marginTop: "20px",
-        minWidth: "260px",
-        width: "95%"
-    };
-
-    const buttonStyle = {
-        marginTop: "20px",
-        width: "120px"
-    };
-
+    const localhost = 'http://localhost:3125';
+    const postQuestionaryRef = `${localhost}/questionnaire`;
+    const requestTimeout = 5000;
+    const timeLocale = 'en';
+    const dateFormat = 'yyyy-MM-DDTHH:mm:ss';
+    const maxAge = 151;
+    const createQuestionarySuccessRef = "../createQuestionarySuccess";
+    const homeRef = "/home";
+    
     // HOCs
     const [questionary, setQuestionary] = useState<Partial<Questionary>>({});
+    let navigate = useNavigate();
 
-    // Properties On Change, age validation
+    // Properties On Change
+    const onChangePhone = (value: any) => {
+        setQuestionary({...questionary, contactPhone: value });
+    };
+
     const onChangeAge = (e: React.ChangeEvent<HTMLInputElement>) => {
         const rule = /^[0-9\b]+$/;
         if ((e.target.value === '' 
             || rule.test(e.target.value))
-            && Number(e.target.value) < 151) {
+            && Number(e.target.value) < maxAge) {
             setQuestionary({...questionary, age: Number(e.target.value) });
         }
         else {
@@ -65,19 +50,31 @@ const QuestionaryCreator = () => {
     }
 
     // Actions
-    const registerQuestionary = () => {
-        /* request required fields */
+    async function registerQuestionary() {
+        Moment.locale(timeLocale);
+        questionary.registrationDate = 
+            String(Moment(new Date()).format(dateFormat));
         let questionaryJson = JSON.stringify(questionary);
+        
+        const response = await axios.post(
+            postQuestionaryRef, 
+            questionaryJson,
+            {
+                timeout: requestTimeout,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-        alert('Good! ' + questionaryJson); 
+        alert('Addition result: ' + response.statusText); 
+        
+        if (response.statusText === 'OK') {
+            navigate(createQuestionarySuccessRef);
+        }
     };
 
     // Render
     return (        
-        <FormControl style={registrationFormStyle}>
-            <div>
-            <Typography variant="h4">Заполните анкету-заявку</Typography>
-            </div>
+        <FormControl style={questionaryFormStyle}>
+            <div><Typography variant="h4">{questionaryCreateHeader}</Typography></div>
             <br />
 
             <Accordion>
@@ -90,15 +87,48 @@ const QuestionaryCreator = () => {
                 <AccordionDetails>
                     <TextField 
                         label={nameHeaderInner} 
-                        onChange={e => setQuestionary({...questionary, name: e.target.value })} 
+                        onChange={e => setQuestionary({...questionary, name: e.target.value})} 
                         required
-                        style={entryStyle}
+                        style={questionaryEntryStyle}
                         variant="outlined" />
                     <br />
                     <TextField 
                         label={pronounHeaderInner}
-                        onChange={e => setQuestionary({...questionary, pronouns: e.target.value })} 
-                        style={entryStyle}
+                        onChange={e => setQuestionary({...questionary, pronouns: e.target.value})} 
+                        style={questionaryEntryStyle}
+                        variant="outlined" />
+                    <br />
+                </AccordionDetails>
+            </Accordion>
+
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1-content"
+                    id="panel1-header">
+                <Typography variant="h6">{contactsHeaderOuter}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <MuiTelInput 
+                        defaultCountry='RU'
+                        label={phoneHeaderInner} 
+                        onChange={onChangePhone}
+                        required
+                        value={questionary.contactPhone}
+                    />
+                    <br />
+                    <TextField 
+                        label={eMailHeaderInner}
+                        onChange={e => setQuestionary({...questionary, contactEmail: e.target.value})} 
+                        required
+                        style={questionaryEntryStyle}
+                        variant="outlined" />
+                    <br />
+                    <TextField 
+                        label={telegramHeaderInner}
+                        onChange={e => setQuestionary({...questionary, contactTelegram: e.target.value})} 
+                        required
+                        style={questionaryEntryStyle}
                         variant="outlined" />
                     <br />
                 </AccordionDetails>
@@ -116,22 +146,22 @@ const QuestionaryCreator = () => {
                         label={ageHeaderInner} 
                         onChange={onChangeAge} 
                         required
-                        style={entryStyle}
+                        style={questionaryEntryStyle}
                         variant="outlined" />
                     <br />
                     <TextField 
                         label={timezoneHeaderInner}
-                        onChange={e => setQuestionary({...questionary, timeZone: e.target.value })}  
+                        onChange={e => setQuestionary({...questionary, timeZone: e.target.value})}  
                         required
-                        style={entryStyle}
+                        style={questionaryEntryStyle}
                         variant="outlined" />
                     <br />
                     <TextField 
                         label={neuroDiffHeaderInner}
                         multiline
-                        onChange={e => setQuestionary({...questionary, neuroDifferences: e.target.value })} 
+                        onChange={e => setQuestionary({...questionary, neuroDifferences: e.target.value})} 
                         rows={5}
-                        style={entryStyle}
+                        style={questionaryEntryStyle}
                         variant="outlined" />
                     <br />
                     <br />
@@ -141,9 +171,9 @@ const QuestionaryCreator = () => {
                     </Typography>
                     <TextField 
                         multiline
-                        onChange={e => setQuestionary({...questionary, mentalSpecifics: e.target.value })} 
+                        onChange={e => setQuestionary({...questionary, mentalSpecifics: e.target.value})} 
                         rows={5}
-                        style={entryStyle}
+                        style={questionaryEntryStyle}
                         variant="outlined" />
                     <br />
                 </AccordionDetails>
@@ -163,10 +193,10 @@ const QuestionaryCreator = () => {
                     </Typography>
                     <TextField 
                         multiline
-                        onChange={e => setQuestionary({...questionary, psyWishes: e.target.value })} 
+                        onChange={e => setQuestionary({...questionary, psyWishes: e.target.value})} 
                         placeholder={psyWishesPlaceholder}
                         rows={5}
-                        style={entryStyle}
+                        style={questionaryEntryStyle}
                         variant="outlined" />
                     <br />
                 </AccordionDetails>
@@ -183,10 +213,10 @@ const QuestionaryCreator = () => {
                     <TextField 
                         label={psyRequestHeaderInner} 
                         multiline
-                        onChange={e => setQuestionary({...questionary, psyRequest: e.target.value })} 
+                        onChange={e => setQuestionary({...questionary, psyRequest: e.target.value})} 
                         required
                         rows={5}
-                        style={entryStyle}
+                        style={questionaryEntryStyle}
                         variant="outlined" />
                     <br />
                 </AccordionDetails>
@@ -206,9 +236,9 @@ const QuestionaryCreator = () => {
                     </Typography>
                     <TextField 
                         multiline
-                        onChange={e => setQuestionary({...questionary, therapyExperience: e.target.value })} 
+                        onChange={e => setQuestionary({...questionary, therapyExperience: e.target.value})} 
                         rows={5}
-                        style={entryStyle}
+                        style={questionaryEntryStyle}
                         variant="outlined" />
                     <br />
                     <br />
@@ -217,23 +247,23 @@ const QuestionaryCreator = () => {
                         variant="body1">{isForPayHeader}
                     </Typography>
                     <FormControlLabel 
-                        control={<Checkbox onChange={e => setQuestionary({...questionary, isForPay: Boolean(e.target.value) })}/>}  
+                        control={<Checkbox onChange={e => setQuestionary({...questionary, isForPay: Boolean(e.target.value)})}/>}  
                         label={isForPayCheckBoxHeader} />
                 </AccordionDetails>
             </Accordion>
 
             <Button 
                 onClick={registerQuestionary}
-                style={buttonStyle}
+                style={questionaryButtonStyle}
                 variant={'contained'}>
-                    Отправить
+                    {sendButtonHeader}
             </Button>  
             <br/>   
 
             <Link className="link_field"
                     variant="body2"
-                    href="/home">
-                    Вернуться на стартовую страницу
+                    href={homeRef}>
+                    {backToHomeButtonHeader}
             </Link>     
             <br/>    
         </FormControl>              
@@ -241,3 +271,4 @@ const QuestionaryCreator = () => {
 }
 
 export default QuestionaryCreator;
+
