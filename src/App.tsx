@@ -1,11 +1,7 @@
 import './App.css';
 import Home from './components/Home';
 import QuestionaryCreator from './components/QuestionaryCreator';
-import {
-  Route,
-  Routes,
-  BrowserRouter
-} from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import NoContent from './components/NoContent';
 import QuestionarySuccess from './components/QuestionarySuccess';
 
