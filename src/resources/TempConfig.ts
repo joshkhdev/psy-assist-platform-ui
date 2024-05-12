@@ -1,0 +1,1 @@
+export const localhostPath = 'http://localhost:3125';

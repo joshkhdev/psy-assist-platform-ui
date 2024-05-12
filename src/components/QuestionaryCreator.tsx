@@ -16,11 +16,11 @@ import { MuiTelInput } from "mui-tel-input";
 import { Questionary } from '../models/Questionary';
 import { questionaryFormStyle, questionaryEntryStyle, questionaryButtonStyle } from '../styles/QuestionaryStyles';
 import { aboutHeaderOuter, ageHeaderInner, backToHomeButtonHeader, contactsHeaderOuter, eMailHeaderInner, isForPayCheckBoxHeader, isForPayHeader, mentalSpecHeaderInner, nameHeaderInner, nameHeaderOuter, neuroDiffHeaderInner, phoneHeaderInner, pronounHeaderInner, psyRequestHeaderInner, psyRequestHeaderOuter, psyWishAttentionHeaderInner, psyWishesHeaderInner, psyWishesHeaderOuter, psyWishesPlaceholder, questionaryCreateHeader, sendButtonHeader, telegramHeaderInner, therapyExpHeaderInner, therapyExpHeaderOuter, timezoneHeaderInner } from '../resources/QuestionaryCreatorResources';
+import { localhostPath } from '../resources/TempConfig';
 
 const QuestionaryCreator = () => {   
     // Constants
-    const localhost = 'http://localhost:3125';
-    const postQuestionaryRef = `${localhost}/questionnaire`;
+    const postQuestionaryRef = `${localhostPath}/questionnaire`;
     const requestTimeout = 5000;
     const timeLocale = 'en';
     const dateFormat = 'yyyy-MM-DDTHH:mm:ss';
