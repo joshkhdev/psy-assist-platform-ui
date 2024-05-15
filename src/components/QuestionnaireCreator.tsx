@@ -52,8 +52,8 @@ const QuestionnaireCreator = () => {
         }
     }
 
-    const onRegisterEnabled =
-        questionnaire.contactTelegram != undefined 
+    const onRegisterEnabled 
+        = questionnaire.contactTelegram != undefined 
         && questionnaire.contactTelegram.length > 0
         && questionnaire.contactEmail != undefined 
         && questionnaire.contactEmail.length > 0
@@ -106,7 +106,7 @@ const QuestionnaireCreator = () => {
             <div><Typography variant="h4">{questionnaireCreateHeader}</Typography></div>
             <br />
 
-            <Accordion>
+            <Accordion defaultExpanded>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
@@ -130,7 +130,7 @@ const QuestionnaireCreator = () => {
                 </AccordionDetails>
             </Accordion>
 
-            <Accordion>
+            <Accordion defaultExpanded>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
