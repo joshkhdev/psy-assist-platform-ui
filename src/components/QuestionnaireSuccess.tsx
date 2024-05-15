@@ -1,7 +1,7 @@
 import { Button, Card, CardActions, CardContent, Grid, Typography } 
 from "@mui/material";
 
-function QuestionarySuccess()
+function QuestionnaireSuccess()
 {    
     return (   
         <Grid item={true} xs={9}
@@ -20,4 +20,4 @@ function QuestionarySuccess()
     );
 }
 
-export default QuestionarySuccess;
+export default QuestionnaireSuccess;

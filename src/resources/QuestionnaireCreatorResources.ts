@@ -1,4 +1,4 @@
-export const questionaryCreateHeader = "Заполните анкету-заявку";
+export const questionnaireCreateHeader = "Заполните анкету-заявку";
 export const nameHeaderOuter = "Как вас зовут и какие местоимения вы используете?";
 export const nameHeaderInner = "Напишите ваше имя";
 export const contactsHeaderOuter = "Контакты для связи";

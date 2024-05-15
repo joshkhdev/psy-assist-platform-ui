@@ -9,7 +9,7 @@ function Home()
             </div>
             <div>
                 <div>
-                    <Link to={'/createQuestionary'}>Оставить заявку </Link>
+                    <Link to={'/createQuestionnaire'}>Оставить заявку </Link>
                 </div> 
                 <a
                     className="App-link"

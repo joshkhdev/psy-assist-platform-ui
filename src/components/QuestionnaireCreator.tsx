@@ -1,3 +1,6 @@
+// переименовать Questionnaire -> nn
+// Правки из чата
+
 // System
 import axios from 'axios';
 import Moment from 'moment';
@@ -13,28 +16,28 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { MuiTelInput } from "mui-tel-input";
 
 // App
-import { Questionary } from '../models/Questionary';
-import { questionaryFormStyle, questionaryEntryStyle, questionaryButtonStyle } from '../styles/QuestionaryStyles';
-import { aboutHeaderOuter, ageHeaderInner, backToHomeButtonHeader, contactsHeaderOuter, eMailHeaderInner, isForPayCheckBoxHeader, isForPayHeader, mentalSpecHeaderInner, nameHeaderInner, nameHeaderOuter, neuroDiffHeaderInner, phoneHeaderInner, pronounHeaderInner, psyRequestHeaderInner, psyRequestHeaderOuter, psyWishAttentionHeaderInner, psyWishesHeaderInner, psyWishesHeaderOuter, psyWishesPlaceholder, questionaryCreateHeader, sendButtonHeader, telegramHeaderInner, therapyExpHeaderInner, therapyExpHeaderOuter, timezoneHeaderInner } from '../resources/QuestionaryCreatorResources';
+import { Questionnaire } from '../models/Questionnaire';
+import { questionnaireFormStyle, questionnaireEntryStyle, questionnaireButtonStyle } from '../styles/QuestionnaireStyles';
+import { aboutHeaderOuter, ageHeaderInner, backToHomeButtonHeader, contactsHeaderOuter, eMailHeaderInner, isForPayCheckBoxHeader, isForPayHeader, mentalSpecHeaderInner, nameHeaderInner, nameHeaderOuter, neuroDiffHeaderInner, phoneHeaderInner, pronounHeaderInner, psyRequestHeaderInner, psyRequestHeaderOuter, psyWishAttentionHeaderInner, psyWishesHeaderInner, psyWishesHeaderOuter, psyWishesPlaceholder, questionnaireCreateHeader, sendButtonHeader, telegramHeaderInner, therapyExpHeaderInner, therapyExpHeaderOuter, timezoneHeaderInner } from '../resources/QuestionnaireCreatorResources';
 import { localhostPath } from '../resources/TempConfig';
 
-const QuestionaryCreator = () => {   
+const QuestionnaireCreator = () => {   
     // Constants
-    const postQuestionaryRef = `${localhostPath}/questionnaire`;
+    const postQuestionnaireRef = `${localhostPath}/questionnaire`;
     const requestTimeout = 5000;
     const timeLocale = 'en';
     const dateFormat = 'yyyy-MM-DDTHH:mm:ss';
     const maxAge = 151;
-    const createQuestionarySuccessRef = "../createQuestionarySuccess";
+    const createQuestionnaireSuccessRef = "../createQuestionnaireSuccess";
     const homeRef = "/home";
     
     // HOCs
-    const [questionary, setQuestionary] = useState<Partial<Questionary>>({});
+    const [questionnaire, setQuestionnaire] = useState<Partial<Questionnaire>>({});
     let navigate = useNavigate();
 
     // Properties On Change
     const onChangePhone = (value: any) => {
-        setQuestionary({...questionary, contactPhone: value });
+        setQuestionnaire({...questionnaire, contactPhone: value });
     };
 
     const onChangeAge = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +45,7 @@ const QuestionaryCreator = () => {
         if ((e.target.value === '' 
             || rule.test(e.target.value))
             && Number(e.target.value) < maxAge) {
-            setQuestionary({...questionary, age: Number(e.target.value) });
+            setQuestionnaire({...questionnaire, age: Number(e.target.value) });
         }
         else {
             e.target.value = e.target.value.slice(0, -1);
@@ -50,15 +53,15 @@ const QuestionaryCreator = () => {
     }
 
     // Actions
-    async function registerQuestionary() {
+    async function registerQuestionnaire() {
         Moment.locale(timeLocale);
-        questionary.registrationDate = 
+        questionnaire.registrationDate = 
             String(Moment(new Date()).format(dateFormat));
-        let questionaryJson = JSON.stringify(questionary);
+        let questionnaireJson = JSON.stringify(questionnaire);
         
         const response = await axios.post(
-            postQuestionaryRef, 
-            questionaryJson,
+            postQuestionnaireRef, 
+            questionnaireJson,
             {
                 timeout: requestTimeout,
                 headers: { 'Content-Type': 'application/json' }
@@ -67,14 +70,14 @@ const QuestionaryCreator = () => {
         alert('Addition result: ' + response.statusText); 
         
         if (response.statusText === 'OK') {
-            navigate(createQuestionarySuccessRef);
+            navigate(createQuestionnaireSuccessRef);
         }
     };
 
     // Render
     return (        
-        <FormControl style={questionaryFormStyle}>
-            <div><Typography variant="h4">{questionaryCreateHeader}</Typography></div>
+        <FormControl style={questionnaireFormStyle}>
+            <div><Typography variant="h4">{questionnaireCreateHeader}</Typography></div>
             <br />
 
             <Accordion>
@@ -87,15 +90,15 @@ const QuestionaryCreator = () => {
                 <AccordionDetails>
                     <TextField 
                         label={nameHeaderInner} 
-                        onChange={e => setQuestionary({...questionary, name: e.target.value})} 
+                        onChange={e => setQuestionnaire({...questionnaire, name: e.target.value})} 
                         required
-                        style={questionaryEntryStyle}
+                        style={questionnaireEntryStyle}
                         variant="outlined" />
                     <br />
                     <TextField 
                         label={pronounHeaderInner}
-                        onChange={e => setQuestionary({...questionary, pronouns: e.target.value})} 
-                        style={questionaryEntryStyle}
+                        onChange={e => setQuestionnaire({...questionnaire, pronouns: e.target.value})} 
+                        style={questionnaireEntryStyle}
                         variant="outlined" />
                     <br />
                 </AccordionDetails>
@@ -114,21 +117,21 @@ const QuestionaryCreator = () => {
                         label={phoneHeaderInner} 
                         onChange={onChangePhone}
                         required
-                        value={questionary.contactPhone}
+                        value={questionnaire.contactPhone}
                     />
                     <br />
                     <TextField 
                         label={eMailHeaderInner}
-                        onChange={e => setQuestionary({...questionary, contactEmail: e.target.value})} 
+                        onChange={e => setQuestionnaire({...questionnaire, contactEmail: e.target.value})} 
                         required
-                        style={questionaryEntryStyle}
+                        style={questionnaireEntryStyle}
                         variant="outlined" />
                     <br />
                     <TextField 
                         label={telegramHeaderInner}
-                        onChange={e => setQuestionary({...questionary, contactTelegram: e.target.value})} 
+                        onChange={e => setQuestionnaire({...questionnaire, contactTelegram: e.target.value})} 
                         required
-                        style={questionaryEntryStyle}
+                        style={questionnaireEntryStyle}
                         variant="outlined" />
                     <br />
                 </AccordionDetails>
@@ -146,22 +149,22 @@ const QuestionaryCreator = () => {
                         label={ageHeaderInner} 
                         onChange={onChangeAge} 
                         required
-                        style={questionaryEntryStyle}
+                        style={questionnaireEntryStyle}
                         variant="outlined" />
                     <br />
                     <TextField 
                         label={timezoneHeaderInner}
-                        onChange={e => setQuestionary({...questionary, timeZone: e.target.value})}  
+                        onChange={e => setQuestionnaire({...questionnaire, timeZone: e.target.value})}  
                         required
-                        style={questionaryEntryStyle}
+                        style={questionnaireEntryStyle}
                         variant="outlined" />
                     <br />
                     <TextField 
                         label={neuroDiffHeaderInner}
                         multiline
-                        onChange={e => setQuestionary({...questionary, neuroDifferences: e.target.value})} 
+                        onChange={e => setQuestionnaire({...questionnaire, neuroDifferences: e.target.value})} 
                         rows={5}
-                        style={questionaryEntryStyle}
+                        style={questionnaireEntryStyle}
                         variant="outlined" />
                     <br />
                     <br />
@@ -171,9 +174,9 @@ const QuestionaryCreator = () => {
                     </Typography>
                     <TextField 
                         multiline
-                        onChange={e => setQuestionary({...questionary, mentalSpecifics: e.target.value})} 
+                        onChange={e => setQuestionnaire({...questionnaire, mentalSpecifics: e.target.value})} 
                         rows={5}
-                        style={questionaryEntryStyle}
+                        style={questionnaireEntryStyle}
                         variant="outlined" />
                     <br />
                 </AccordionDetails>
@@ -193,10 +196,10 @@ const QuestionaryCreator = () => {
                     </Typography>
                     <TextField 
                         multiline
-                        onChange={e => setQuestionary({...questionary, psyWishes: e.target.value})} 
+                        onChange={e => setQuestionnaire({...questionnaire, psyWishes: e.target.value})} 
                         placeholder={psyWishesPlaceholder}
                         rows={5}
-                        style={questionaryEntryStyle}
+                        style={questionnaireEntryStyle}
                         variant="outlined" />
                     <br />
                 </AccordionDetails>
@@ -213,10 +216,10 @@ const QuestionaryCreator = () => {
                     <TextField 
                         label={psyRequestHeaderInner} 
                         multiline
-                        onChange={e => setQuestionary({...questionary, psyRequest: e.target.value})} 
+                        onChange={e => setQuestionnaire({...questionnaire, psyRequest: e.target.value})} 
                         required
                         rows={5}
-                        style={questionaryEntryStyle}
+                        style={questionnaireEntryStyle}
                         variant="outlined" />
                     <br />
                 </AccordionDetails>
@@ -236,9 +239,9 @@ const QuestionaryCreator = () => {
                     </Typography>
                     <TextField 
                         multiline
-                        onChange={e => setQuestionary({...questionary, therapyExperience: e.target.value})} 
+                        onChange={e => setQuestionnaire({...questionnaire, therapyExperience: e.target.value})} 
                         rows={5}
-                        style={questionaryEntryStyle}
+                        style={questionnaireEntryStyle}
                         variant="outlined" />
                     <br />
                     <br />
@@ -247,14 +250,14 @@ const QuestionaryCreator = () => {
                         variant="body1">{isForPayHeader}
                     </Typography>
                     <FormControlLabel 
-                        control={<Checkbox onChange={e => setQuestionary({...questionary, isForPay: Boolean(e.target.value)})}/>}  
+                        control={<Checkbox onChange={e => setQuestionnaire({...questionnaire, isForPay: Boolean(e.target.value)})}/>}  
                         label={isForPayCheckBoxHeader} />
                 </AccordionDetails>
             </Accordion>
 
             <Button 
-                onClick={registerQuestionary}
-                style={questionaryButtonStyle}
+                onClick={registerQuestionnaire}
+                style={questionnaireButtonStyle}
                 variant={'contained'}>
                     {sendButtonHeader}
             </Button>  
@@ -270,5 +273,5 @@ const QuestionaryCreator = () => {
     );
 }
 
-export default QuestionaryCreator;
+export default QuestionnaireCreator;
 
