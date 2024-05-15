@@ -52,6 +52,32 @@ const QuestionnaireCreator = () => {
         }
     }
 
+    const onRegisterEnabled =
+        questionnaire.contactTelegram != undefined 
+        && questionnaire.contactTelegram.length > 0
+        && questionnaire.contactEmail != undefined 
+        && questionnaire.contactEmail.length > 0
+        && questionnaire.contactPhone != undefined 
+        && questionnaire.contactPhone.length > 0
+        && questionnaire.name != undefined 
+        && questionnaire.name.length > 0
+        && questionnaire.pronouns != undefined 
+        && questionnaire.pronouns.length > 0
+        && questionnaire.age != undefined 
+        && questionnaire.age > 0
+        && questionnaire.timeZone != undefined 
+        && questionnaire.timeZone.length > 0
+        && questionnaire.neuroDifferences != undefined 
+        && questionnaire.neuroDifferences.length > 0
+        && questionnaire.mentalSpecifics != undefined 
+        && questionnaire.mentalSpecifics.length > 0
+        && questionnaire.psyWishes != undefined 
+        && questionnaire.psyWishes.length > 0
+        && questionnaire.psyRequest != undefined 
+        && questionnaire.psyRequest.length > 0
+        && questionnaire.therapyExperience != undefined 
+        && questionnaire.therapyExperience.length > 0;
+
     // Actions
     async function registerQuestionnaire() {
         Moment.locale(timeLocale);
@@ -256,6 +282,7 @@ const QuestionnaireCreator = () => {
             </Accordion>
 
             <Button 
+                disabled={!onRegisterEnabled}
                 onClick={registerQuestionnaire}
                 style={questionnaireButtonStyle}
                 variant={'contained'}>

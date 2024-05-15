@@ -1,4 +1,4 @@
-export interface Questionary {
+export interface Questionnaire {
     contactTelegram: string;
     contactEmail: string;
     contactPhone: string;
