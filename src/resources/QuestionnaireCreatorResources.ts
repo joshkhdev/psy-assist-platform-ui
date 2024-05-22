@@ -23,3 +23,4 @@ export const isForPayHeader = "Если вы готовы с самого нач
 export const isForPayCheckBoxHeader = "Готов заниматься платно";
 export const sendButtonHeader = "Отправить";
 export const backToHomeButtonHeader = "Вернуться на стартовую страницу";
+export const registrationConditionHeader = "Для возможности регистрации заявки необходимо заполнить все поля";

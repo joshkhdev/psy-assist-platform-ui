@@ -18,7 +18,7 @@ import { MuiTelInput } from "mui-tel-input";
 // App
 import { Questionnaire } from '../models/Questionnaire';
 import { questionnaireFormStyle, questionnaireEntryStyle, questionnaireButtonStyle } from '../styles/QuestionnaireStyles';
-import { aboutHeaderOuter, ageHeaderInner, backToHomeButtonHeader, contactsHeaderOuter, eMailHeaderInner, isForPayCheckBoxHeader, isForPayHeader, mentalSpecHeaderInner, nameHeaderInner, nameHeaderOuter, neuroDiffHeaderInner, phoneHeaderInner, pronounHeaderInner, psyRequestHeaderInner, psyRequestHeaderOuter, psyWishAttentionHeaderInner, psyWishesHeaderInner, psyWishesHeaderOuter, psyWishesPlaceholder, questionnaireCreateHeader, sendButtonHeader, telegramHeaderInner, therapyExpHeaderInner, therapyExpHeaderOuter, timezoneHeaderInner } from '../resources/QuestionnaireCreatorResources';
+import { aboutHeaderOuter, ageHeaderInner, backToHomeButtonHeader, contactsHeaderOuter, eMailHeaderInner, isForPayCheckBoxHeader, isForPayHeader, mentalSpecHeaderInner, nameHeaderInner, nameHeaderOuter, neuroDiffHeaderInner, phoneHeaderInner, pronounHeaderInner, psyRequestHeaderInner, psyRequestHeaderOuter, psyWishAttentionHeaderInner, psyWishesHeaderInner, psyWishesHeaderOuter, psyWishesPlaceholder, questionnaireCreateHeader, registrationConditionHeader, sendButtonHeader, telegramHeaderInner, therapyExpHeaderInner, therapyExpHeaderOuter, timezoneHeaderInner } from '../resources/QuestionnaireCreatorResources';
 import { localhostPath } from '../resources/TempConfig';
 
 const QuestionnaireCreator = () => {   
@@ -280,6 +280,12 @@ const QuestionnaireCreator = () => {
                         label={isForPayCheckBoxHeader} />
                 </AccordionDetails>
             </Accordion>
+
+            <br/>  
+            <Typography 
+                fontStyle={'italic'} 
+                variant="body1">{registrationConditionHeader}
+            </Typography>
 
             <Button 
                 disabled={!onRegisterEnabled}
