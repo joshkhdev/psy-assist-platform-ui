@@ -1,7 +1,7 @@
 export interface Questionnaire {
-    contactTelegram: string;
-    contactEmail: string;
-    contactPhone: string;
+    telegram: string;
+    email: string;
+    phone: string;
 
     name: string;
     pronouns: string;

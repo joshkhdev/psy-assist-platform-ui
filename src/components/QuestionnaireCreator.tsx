@@ -23,7 +23,7 @@ import { localhostPath } from '../resources/TempConfig';
 
 const QuestionnaireCreator = () => {   
     // Constants
-    const postQuestionnaireRef = `${localhostPath}/questionnaire`;
+    const postQuestionnaireRef = `${localhostPath}/questionnaires`;
     const requestTimeout = 5000;
     const timeLocale = 'en';
     const dateFormat = 'yyyy-MM-DDTHH:mm:ss';
@@ -37,7 +37,7 @@ const QuestionnaireCreator = () => {
 
     // Properties On Change
     const onChangePhone = (value: any) => {
-        setQuestionnaire({...questionnaire, contactPhone: value });
+        setQuestionnaire({...questionnaire, phone: value });
     };
 
     const onChangeAge = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,12 +53,12 @@ const QuestionnaireCreator = () => {
     }
 
     const onRegisterEnabled 
-        = questionnaire.contactTelegram != undefined 
-        && questionnaire.contactTelegram.length > 0
-        && questionnaire.contactEmail != undefined 
-        && questionnaire.contactEmail.length > 0
-        && questionnaire.contactPhone != undefined 
-        && questionnaire.contactPhone.length > 0
+        = questionnaire.telegram != undefined 
+        && questionnaire.telegram.length > 0
+        && questionnaire.email != undefined 
+        && questionnaire.email.length > 0
+        && questionnaire.phone != undefined 
+        && questionnaire.phone.length > 0
         && questionnaire.name != undefined 
         && questionnaire.name.length > 0
         && questionnaire.pronouns != undefined 
@@ -143,19 +143,19 @@ const QuestionnaireCreator = () => {
                         label={phoneHeaderInner} 
                         onChange={onChangePhone}
                         required
-                        value={questionnaire.contactPhone}
+                        value={questionnaire.phone}
                     />
                     <br />
                     <TextField 
                         label={eMailHeaderInner}
-                        onChange={e => setQuestionnaire({...questionnaire, contactEmail: e.target.value})} 
+                        onChange={e => setQuestionnaire({...questionnaire, email: e.target.value})} 
                         required
                         style={questionnaireEntryStyle}
                         variant="outlined" />
                     <br />
                     <TextField 
                         label={telegramHeaderInner}
-                        onChange={e => setQuestionnaire({...questionnaire, contactTelegram: e.target.value})} 
+                        onChange={e => setQuestionnaire({...questionnaire, telegram: e.target.value})} 
                         required
                         style={questionnaireEntryStyle}
                         variant="outlined" />
