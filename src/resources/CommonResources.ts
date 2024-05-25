@@ -1,0 +1,1 @@
+export const backToHomeButtonHeader = "Вернуться на стартовую страницу";

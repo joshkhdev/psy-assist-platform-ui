@@ -1,8 +1,7 @@
 import { Button, Card, CardActions, CardContent, Grid, Typography } 
 from "@mui/material";
 
-function NoContent()
-{    
+function NoContent() {    
     return (   
         <Grid item={true} xs={9}
                   md={5}>

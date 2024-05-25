@@ -1,4 +1,3 @@
-// Styles
 export const questionnaireFormStyle = {
     padding: "50px",
     background: "#f5f5f5",

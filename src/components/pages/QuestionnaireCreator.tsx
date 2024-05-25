@@ -1,35 +1,69 @@
-// переименовать Questionnaire -> nn
-// Правки из чата
-
 // System
 import axios from 'axios';
 import Moment from 'moment';
-import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
+import { useState } from 'react';
 // MUI
-import { Button, Link, TextField, Typography, FormControlLabel, Checkbox, FormControl } from "@mui/material";
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
+import { 
+    Accordion, 
+    AccordionDetails, 
+    AccordionSummary, 
+    Button, 
+    Checkbox, 
+    FormControl, 
+    FormControlLabel, 
+    Link, 
+    TextField, 
+    Typography 
+} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { MuiTelInput } from "mui-tel-input";
-
-// App
-import { Questionnaire } from '../models/Questionnaire';
-import { questionnaireFormStyle, questionnaireEntryStyle, questionnaireButtonStyle } from '../styles/QuestionnaireStyles';
-import { aboutHeaderOuter, ageHeaderInner, backToHomeButtonHeader, contactsHeaderOuter, eMailHeaderInner, isForPayCheckBoxHeader, isForPayHeader, mentalSpecHeaderInner, nameHeaderInner, nameHeaderOuter, neuroDiffHeaderInner, phoneHeaderInner, pronounHeaderInner, psyRequestHeaderInner, psyRequestHeaderOuter, psyWishAttentionHeaderInner, psyWishesHeaderInner, psyWishesHeaderOuter, psyWishesPlaceholder, questionnaireCreateHeader, registrationConditionHeader, sendButtonHeader, telegramHeaderInner, therapyExpHeaderInner, therapyExpHeaderOuter, timezoneHeaderInner } from '../resources/QuestionnaireCreatorResources';
-import { localhostPath } from '../resources/TempConfig';
+// Classes
+import { Questionnaire } from '../../models/Questionnaire';
+// Styles and Resources
+import { 
+    questionnaireFormStyle, 
+    questionnaireEntryStyle, 
+    questionnaireButtonStyle 
+} from '../../styles/QuestionnaireStyles';
+import { backToHomeButtonHeader } from '../../resources/CommonResources';
+import { 
+    aboutHeaderOuter, 
+    ageHeaderInner, 
+    contactsHeaderOuter, 
+    eMailHeaderInner, 
+    isForPayCheckBoxHeader, 
+    isForPayHeader, 
+    mentalSpecHeaderInner, 
+    nameHeaderInner, 
+    nameHeaderOuter, 
+    neuroDiffHeaderInner, 
+    phoneHeaderInner, 
+    pronounHeaderInner, 
+    psyRequestHeaderInner, 
+    psyRequestHeaderOuter, 
+    psyWishAttentionHeaderInner, 
+    psyWishesHeaderInner, 
+    psyWishesHeaderOuter, 
+    psyWishesPlaceholder, 
+    questionnaireCreateHeader, 
+    registrationConditionHeader, 
+    sendButtonHeader, 
+    telegramHeaderInner, 
+    therapyExpHeaderInner, 
+    therapyExpHeaderOuter, 
+    timezoneHeaderInner 
+} from '../../resources/QuestionnaireCreatorResources';
+import { postQuestionnaireRef } from '../../resources/Refs';
 
 const QuestionnaireCreator = () => {   
     // Constants
-    const postQuestionnaireRef = `${localhostPath}/questionnaires`;
     const requestTimeout = 5000;
     const timeLocale = 'en';
     const dateFormat = 'yyyy-MM-DDTHH:mm:ss';
     const maxAge = 151;
     const createQuestionnaireSuccessRef = "../createQuestionnaireSuccess";
-    const homeRef = "/home";
+    const homeRef = "/";
     
     // HOCs
     const [questionnaire, setQuestionnaire] = useState<Partial<Questionnaire>>({});
@@ -296,10 +330,11 @@ const QuestionnaireCreator = () => {
             </Button>  
             <br/>   
 
-            <Link className="link_field"
-                    variant="body2"
-                    href={homeRef}>
-                    {backToHomeButtonHeader}
+            <Link 
+                className="link_field"
+                variant="body2"
+                href={homeRef}>
+                {backToHomeButtonHeader}
             </Link>     
             <br/>    
         </FormControl>              
@@ -307,4 +342,3 @@ const QuestionnaireCreator = () => {
 }
 
 export default QuestionnaireCreator;
-
