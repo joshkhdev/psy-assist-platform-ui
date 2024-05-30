@@ -1,3 +1,5 @@
+//#region Imports
+
 // System
 import axios from 'axios';
 import React, { useEffect } from 'react';
@@ -23,6 +25,8 @@ import {
     CAT_PICS, 
     PSY_PAGE_HEADER } from '../../resources/PsychologistsViewerResources';
 import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
+
+//#endregion
 
 const PsychologistsViewer = () => {
     // HOCs
@@ -66,7 +70,14 @@ const PsychologistsViewer = () => {
 
             <Grid container spacing={1}>
                 {cards.map((card, index) => {
-                    const { image, name, description, includingQueries, exclusionQueries } = card;
+                    const { 
+                        image, 
+                        name, 
+                        description, 
+                        includingQueries, 
+                        exclusionQueries 
+                    } = card;
+                    
                     return (
                     <Grid item>
                         <PsychologistCard 

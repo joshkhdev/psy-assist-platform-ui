@@ -53,14 +53,16 @@ import {
     THERAPY_EXP_OUTER_HEADER, 
     TIMEZONE_INNER_HEADER 
 } from '../../resources/QuestionnaireCreatorResources';
-import { POST_QUESTIONNAIRE_REF } from '../../resources/Refs';
+import { 
+    CREATE_QUE_SUCCESS_REF,
+    HOME_REF, 
+    POST_QUESTIONNAIRE_REF 
+} from '../../resources/Refs';
 
 const QuestionnaireCreator = () => {   
     // Constants
     const requestTimeout = 5000;
     const maxAge = 151;
-    const createQuestionnaireSuccessRef = '../createQuestionnaireSuccess';
-    const homeRef = '/';
     
     // HOCs
     const [questionnaire, setQuestionnaire] = useState<Partial<Questionnaire>>({});
@@ -112,7 +114,7 @@ const QuestionnaireCreator = () => {
         alert('Addition result: ' + response.statusText); 
         
         if (response.statusText === 'OK') {
-            navigate(createQuestionnaireSuccessRef);
+            navigate(`../${CREATE_QUE_SUCCESS_REF}`);
         }
     };
 
@@ -127,8 +129,9 @@ const QuestionnaireCreator = () => {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel1-content'
                     id='panel1-header'>
-                <Typography variant='h6'>{NAME_OUTER_HEADER}</Typography>
+                    <Typography variant='h6'>{NAME_OUTER_HEADER}</Typography>
                 </AccordionSummary>
+
                 <AccordionDetails>
                     <TextField 
                         label={NAME_INNER_HEADER} 
@@ -151,8 +154,9 @@ const QuestionnaireCreator = () => {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel1-content'
                     id='panel1-header'>
-                <Typography variant='h6'>{CONTACTS_OUTER_HEADER}</Typography>
+                    <Typography variant='h6'>{CONTACTS_OUTER_HEADER}</Typography>
                 </AccordionSummary>
+
                 <AccordionDetails>
                     <MuiTelInput 
                         defaultCountry='RU'
@@ -184,8 +188,9 @@ const QuestionnaireCreator = () => {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel1-content'
                     id='panel1-header'>
-                <Typography variant='h6'>{ABOUT_OUTER_HEADER}</Typography>
+                    <Typography variant='h6'>{ABOUT_OUTER_HEADER}</Typography>
                 </AccordionSummary>
+
                 <AccordionDetails>
                     <TextField 
                         label={AGE_INNER_HEADER} 
@@ -229,8 +234,9 @@ const QuestionnaireCreator = () => {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel1-content'
                     id='panel1-header'>
-                <Typography variant='h6'>{PSY_WICHES_OUTER_HEADER}</Typography>
+                    <Typography variant='h6'>{PSY_WICHES_OUTER_HEADER}</Typography>
                 </AccordionSummary>
+
                 <AccordionDetails>
                     <Typography 
                         fontStyle={'italic'} 
@@ -252,8 +258,9 @@ const QuestionnaireCreator = () => {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel1-content'
                     id='panel1-header'>
-                <Typography variant='h6'>{PSY_REQUEST_OUTER_HEADER}</Typography>
+                    <Typography variant='h6'>{PSY_REQUEST_OUTER_HEADER}</Typography>
                 </AccordionSummary>
+
                 <AccordionDetails>
                     <TextField 
                         label={PSY_REQUEST_INNER_HEADER} 
@@ -272,8 +279,9 @@ const QuestionnaireCreator = () => {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel1-content'
                     id='panel1-header'>
-                <Typography variant='h6'>{THERAPY_EXP_OUTER_HEADER}</Typography>
+                    <Typography variant='h6'>{THERAPY_EXP_OUTER_HEADER}</Typography>
                 </AccordionSummary>
+                
                 <AccordionDetails>
                     <Typography
                         fontStyle={'italic'} 
@@ -315,7 +323,7 @@ const QuestionnaireCreator = () => {
             <Link 
                 className='link_field'
                 variant='body2'
-                href={homeRef}>
+                href={HOME_REF}>
                 {BACK_TO_HOME_BUTTON_HEADER}
             </Link>     
             <br/>    

@@ -1,10 +1,29 @@
+//#region Imports
+
+// System
 import './App.css';
+// Bootstrap
 import 'bootstrap/dist/css/bootstrap.css';
+// MUI
 import Home from './components/pages/Home';
+import { 
+    BrowserRouter,
+    Route, 
+    Routes
+} from 'react-router-dom';
+// Components
 import QuestionnaireCreator from './components/pages/QuestionnaireCreator';
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import QuestionnaireSuccess from './components/pages/QuestionnaireSuccess';
 import PsychologistsViewer from './components/pages/PsychologistsViewer';
+// Styles and Resources
+import { 
+    CREATE_QUESTIONNAIRE_REF, 
+    CREATE_QUE_SUCCESS_REF, 
+    HOME_REF, 
+    PSYCHOLOGIST_CATALOG_REF 
+} from './resources/Refs';
+
+//#endregion
 
 function App() {
   return (
@@ -13,11 +32,11 @@ function App() {
         <p> 
           <BrowserRouter>
             <Routes>
-              <Route path='/' element={<Home />} />
+              <Route path={HOME_REF} element={<Home />} />
               {/* подстановочный путь */}
-              <Route path='createQuestionnaire' element={<QuestionnaireCreator />} />
-              <Route path='psychologists' element={<PsychologistsViewer />} />
-              <Route path='createQuestionnaireSuccess' element={<QuestionnaireSuccess />} />
+              <Route path={CREATE_QUESTIONNAIRE_REF} element={<QuestionnaireCreator />} />
+              <Route path={PSYCHOLOGIST_CATALOG_REF} element={<PsychologistsViewer />} />
+              <Route path={CREATE_QUE_SUCCESS_REF} element={<QuestionnaireSuccess />} />
               <Route path='*' element={<Home />} />
             </Routes>
           </BrowserRouter>
