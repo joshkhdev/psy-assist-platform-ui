@@ -1,4 +1,4 @@
-import { PsychologistProfile } from "./PsychologistProfile";
+import { PsychologistProfile } from './PsychologistProfile';
 
 export class PsychologistProfileCard extends PsychologistProfile {
     image: string;
@@ -6,6 +6,6 @@ export class PsychologistProfileCard extends PsychologistProfile {
     constructor(psychologist?: PsychologistProfile, image?: string) {
         super(psychologist);
         
-        this.image = image ?? ""; 
+        this.image = image ?? ''; 
     }
 }

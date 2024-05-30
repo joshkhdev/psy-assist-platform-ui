@@ -1,5 +1,5 @@
 import { Button, Card, CardActions, CardContent, Grid, Typography } 
-from "@mui/material";
+from '@mui/material';
 
 function QuestionnaireSuccess()
 {    
@@ -8,12 +8,12 @@ function QuestionnaireSuccess()
                   md={5}>
                 <Card sx={{minWidth: 275}}>
                     <CardContent>
-                        <Typography sx={{fontSize: 24}} color="text.secondary" gutterBottom>
+                        <Typography sx={{fontSize: 24}} color='text.secondary' gutterBottom>
                             Анкета успешно отправлена!
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" href="/">Back</Button>
+                        <Button size='small' href='/'>Back</Button>
                     </CardActions>
                 </Card>
             </Grid>          

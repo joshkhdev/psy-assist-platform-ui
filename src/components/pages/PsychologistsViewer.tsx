@@ -16,13 +16,13 @@ import { PsychologistProfileCard } from '../../models/PsychologistProfileCard';
 // Styles and Resources
 import { psychologistFormStyle } from '../../styles/PsychologistViewerStyles';
 import { 
-    getPsychologistsRef, 
-    homeRef 
+    GET_PSYCHOLOGISTS_REF, 
+    HOME_REF 
 } from '../../resources/Refs';
 import { 
-    catPics, 
-    pageHeader } from '../../resources/PsychologistsViewerResources';
-import { backToHomeButtonHeader } from '../../resources/CommonResources';
+    CAT_PICS, 
+    PSY_PAGE_HEADER } from '../../resources/PsychologistsViewerResources';
+import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
 
 const PsychologistsViewer = () => {
     // HOCs
@@ -34,7 +34,7 @@ const PsychologistsViewer = () => {
 
      // Actions
     async function getPsychologists() {
-        const response = await axios.get<string>(getPsychologistsRef);
+        const response = await axios.get<string>(GET_PSYCHOLOGISTS_REF);
         const items: Array<PsychologistProfile> = JSON.parse(JSON.stringify(response.data));
         const sliderObjects = items.map(item => new PsychologistProfile(item));
         
@@ -42,11 +42,11 @@ const PsychologistsViewer = () => {
         let index = 0;
         sliderObjects.forEach((element) => {
             let newCard = new PsychologistProfileCard();
-            newCard.image = catPics[index];
+            newCard.image = CAT_PICS[index];
             newCard.name = element.name;
             newCard.description = element.description;
-            newCard.requestsInclude = element.requestsInclude;
-            newCard.requestsExclude = element.requestsExclude;
+            newCard.includingQueries = element.includingQueries;
+            newCard.exclusionQueries = element.exclusionQueries;
             cards.push(newCard);
             index++;
         });
@@ -57,16 +57,16 @@ const PsychologistsViewer = () => {
     // Render
     return (
         <FormControl style={psychologistFormStyle}>
-        <div className="root">
+        <div className='root'>
             <div>
                 <NavigationBar />
-                <h2>{pageHeader}</h2>
+                <h2>{PSY_PAGE_HEADER}</h2>
             </div>
             <br/>
 
             <Grid container spacing={1}>
                 {cards.map((card, index) => {
-                    const { image, name, description, requestsInclude, requestsExclude } = card;
+                    const { image, name, description, includingQueries, exclusionQueries } = card;
                     return (
                     <Grid item>
                         <PsychologistCard 
@@ -74,8 +74,8 @@ const PsychologistsViewer = () => {
                             psyImage={image}
                             psyName={name}
                             psyDescription={description}
-                            psyRequestsInclude={requestsInclude}
-                            psyRequestsExclude={requestsExclude} />
+                            psyRequestsInclude={includingQueries}
+                            psyRequestsExclude={exclusionQueries} />
                         <br/>
                     </Grid>
                     );
@@ -84,10 +84,10 @@ const PsychologistsViewer = () => {
             <br/>
 
             <Link 
-                className="link_field"
-                variant="body2"
-                href={homeRef}>
-                {backToHomeButtonHeader}
+                className='link_field'
+                variant='body2'
+                href={HOME_REF}>
+                {BACK_TO_HOME_BUTTON_HEADER}
             </Link>
 
       </div>

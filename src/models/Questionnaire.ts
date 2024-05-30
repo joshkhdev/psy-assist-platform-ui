@@ -5,7 +5,7 @@ export interface Questionnaire {
 
     name: string;
     pronouns: string;
-    age: number | undefined;
+    age?: number;
     timeZone: string;
     neuroDifferences: string;
     mentalSpecifics: string;
@@ -13,6 +13,4 @@ export interface Questionnaire {
     psyRequest: string;
     therapyExperience: string;
     isForPay: boolean;
-
-    registrationDate: string;
 }

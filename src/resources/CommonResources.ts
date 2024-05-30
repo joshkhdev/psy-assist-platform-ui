@@ -1,1 +1,1 @@
-export const backToHomeButtonHeader = "Вернуться на стартовую страницу";
+export const BACK_TO_HOME_BUTTON_HEADER = 'Вернуться на стартовую страницу';

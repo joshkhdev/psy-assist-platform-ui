@@ -1,5 +1,5 @@
-import { localhostPath } from "./TempConfig";
+import { SOURCE_PATH } from './TempConfig';
 
-export const homeRef = "/";
-export const postQuestionnaireRef = `${localhostPath}/questionnaires`;
-export const getPsychologistsRef = `${localhostPath}/psychologistprofiles`;
+export const HOME_REF = '/';
+export const POST_QUESTIONNAIRE_REF = `${SOURCE_PATH}/questionnaires`;
+export const GET_PSYCHOLOGISTS_REF = `${SOURCE_PATH}/psychologistprofiles`;

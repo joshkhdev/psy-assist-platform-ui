@@ -10,10 +10,10 @@ import {
 
 // App
 import { 
-    descriptionHeader, 
-    moreButtonHeader, 
-    psyRequestsExcludeHeader, 
-    psyRequestsIncludeHeader 
+    DESCRIPTION_HEADER, 
+    MORE_BUTTON_HEADER, 
+    EXCLUSION_QUERIES_HEADER, 
+    INCLUDING_QUERIES_HEADER 
 } from '../../resources/PsychologistCardResources';
 
 // Component Properties
@@ -38,60 +38,60 @@ const PsychologistCard = (props: Props) => {
             }}>
             
             <CardMedia
-                component="img"
-                alt="cat"
-                height="140"
+                component='img'
+                alt='cat'
+                height='140'
                 image={props.psyImage} />
             
             <CardContent>
                 <Typography 
-                    gutterBottom variant="h5" 
-                    component="div">
+                    gutterBottom variant='h5' 
+                    component='div'>
                     {props.psyName}
                 </Typography>
                 <br/>
 
                 <Typography
-                    gutterBottom variant="subtitle2" 
-                    component="div" 
+                    gutterBottom variant='subtitle2' 
+                    component='div'
                     fontWeight={'bold'}>
-                    {descriptionHeader}
+                    {DESCRIPTION_HEADER}
                 </Typography>
                 <Typography 
-                    variant="body2" 
-                    color="text.secondary">
+                    variant='body2'
+                    color='text.secondary'>
                     {props.psyDescription}
                 </Typography>
                 <br/>
 
                 <Typography
-                    gutterBottom variant="subtitle2" 
-                    component="div" 
+                    gutterBottom variant='subtitle2' 
+                    component='div'
                     fontWeight={'bold'}>
-                    {psyRequestsIncludeHeader}
+                    {INCLUDING_QUERIES_HEADER}
                 </Typography>
                 <Typography 
-                    variant="body2" 
-                    color="text.secondary">
+                    variant='body2' 
+                    color='text.secondary'>
                     {props.psyRequestsInclude}
                 </Typography>
                 <br/>
 
                 <Typography 
-                    gutterBottom variant="subtitle2" 
+                    gutterBottom variant='subtitle2' 
                     component="div" 
                     fontWeight={'bold'}>
-                    {psyRequestsExcludeHeader}
+                    {EXCLUSION_QUERIES_HEADER}
                 </Typography>
                 <Typography 
-                    variant="body2" 
-                    color="text.secondary">
+                    variant='body2'
+                    color='text.secondary'>
                     {props.psyRequestsExclude}
                 </Typography>
             </CardContent>
 
             <CardActions>
-                <Button size="small">{moreButtonHeader}</Button>
+                <Button size='small'>{MORE_BUTTON_HEADER}</Button>
             </CardActions>
         </Card>
     );

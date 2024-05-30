@@ -1,1 +1,1 @@
-export const localhostPath = 'http://localhost:3125';
+export const SOURCE_PATH = 'http://localhost:3125';

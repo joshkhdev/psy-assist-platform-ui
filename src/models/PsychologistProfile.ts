@@ -1,25 +1,25 @@
 export class PsychologistProfile {
-    id: number | undefined;
+    id?: number;
     name: string;
     description: string;
-    timeZone: string | undefined;
-    requestsInclude: string;
-    requestsExclude: string;
-    userId: number | undefined;
-    isActive: string | undefined;
+    timeZone?: string;
+    includingQueries: string;
+    exclusionQueries: string;
+    userId?: number;
+    isActive?: string;
 
     constructor(psychologist?: PsychologistProfile) {
         if (psychologist) {
             this.name = psychologist.name;
             this.description = psychologist.description;
-            this.requestsInclude = psychologist.requestsInclude;
-            this.requestsExclude = psychologist.requestsExclude;
+            this.includingQueries = psychologist.includingQueries;
+            this.exclusionQueries = psychologist.exclusionQueries;
         }
         else {
-            this.name = "";
-            this.description = "";
-            this.requestsInclude = "";
-            this.requestsExclude = "";
+            this.name = '';
+            this.description = '';
+            this.includingQueries = '';
+            this.exclusionQueries = '';
         }
     }
 }

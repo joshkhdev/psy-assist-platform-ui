@@ -1,7 +1,6 @@
 // System
 import axios from 'axios';
-import Moment from 'moment';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 // MUI
 import { 
@@ -15,9 +14,9 @@ import {
     Link, 
     TextField, 
     Typography 
-} from "@mui/material";
+} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { MuiTelInput } from "mui-tel-input";
+import { MuiTelInput } from 'mui-tel-input';
 // Classes
 import { Questionnaire } from '../../models/Questionnaire';
 // Styles and Resources
@@ -26,44 +25,42 @@ import {
     questionnaireEntryStyle, 
     questionnaireButtonStyle 
 } from '../../styles/QuestionnaireStyles';
-import { backToHomeButtonHeader } from '../../resources/CommonResources';
+import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
 import { 
-    aboutHeaderOuter, 
-    ageHeaderInner, 
-    contactsHeaderOuter, 
-    eMailHeaderInner, 
-    isForPayCheckBoxHeader, 
-    isForPayHeader, 
-    mentalSpecHeaderInner, 
-    nameHeaderInner, 
-    nameHeaderOuter, 
-    neuroDiffHeaderInner, 
-    phoneHeaderInner, 
-    pronounHeaderInner, 
-    psyRequestHeaderInner, 
-    psyRequestHeaderOuter, 
-    psyWishAttentionHeaderInner, 
-    psyWishesHeaderInner, 
-    psyWishesHeaderOuter, 
-    psyWishesPlaceholder, 
-    questionnaireCreateHeader, 
-    registrationConditionHeader, 
-    sendButtonHeader, 
-    telegramHeaderInner, 
-    therapyExpHeaderInner, 
-    therapyExpHeaderOuter, 
-    timezoneHeaderInner 
+    ABOUT_OUTER_HEADER, 
+    AGE_INNER_HEADER, 
+    CONTACTS_OUTER_HEADER, 
+    EMAIL_INNER_HEADER, 
+    IS_FOR_PAY_CHECK_BOX_HEADER, 
+    IS_FOR_PAY_HEADER, 
+    MENTAL_SPEC_INNER_HEADER, 
+    NAME_INNER_HEADER, 
+    NAME_OUTER_HEADER, 
+    NEURO_DIFF_INNER_HEADER, 
+    PHONE_INNER_HEADER, 
+    PRONOUN_INNER_HEADER, 
+    PSY_REQUEST_INNER_HEADER, 
+    PSY_REQUEST_OUTER_HEADER, 
+    PSY_WISHES_ATNN_INNER_HEADER, 
+    PSY_WISHES_INNER_HEADER, 
+    PSY_WICHES_OUTER_HEADER, 
+    PSY_WISHES_PLACEHOLDER, 
+    QUESTIONNAIRE_HEADER, 
+    REG_CONDITION_HEADER, 
+    SEND_BUTTON_HEADER, 
+    TELEGRAM_INNER_HEADER, 
+    THERAPY_EXP_INNER_HEADER, 
+    THERAPY_EXP_OUTER_HEADER, 
+    TIMEZONE_INNER_HEADER 
 } from '../../resources/QuestionnaireCreatorResources';
-import { postQuestionnaireRef } from '../../resources/Refs';
+import { POST_QUESTIONNAIRE_REF } from '../../resources/Refs';
 
 const QuestionnaireCreator = () => {   
     // Constants
     const requestTimeout = 5000;
-    const timeLocale = 'en';
-    const dateFormat = 'yyyy-MM-DDTHH:mm:ss';
     const maxAge = 151;
-    const createQuestionnaireSuccessRef = "../createQuestionnaireSuccess";
-    const homeRef = "/";
+    const createQuestionnaireSuccessRef = '../createQuestionnaireSuccess';
+    const homeRef = '/';
     
     // HOCs
     const [questionnaire, setQuestionnaire] = useState<Partial<Questionnaire>>({});
@@ -87,40 +84,25 @@ const QuestionnaireCreator = () => {
     }
 
     const onRegisterEnabled 
-        = questionnaire.telegram != undefined 
-        && questionnaire.telegram.length > 0
-        && questionnaire.email != undefined 
-        && questionnaire.email.length > 0
-        && questionnaire.phone != undefined 
-        && questionnaire.phone.length > 0
-        && questionnaire.name != undefined 
-        && questionnaire.name.length > 0
-        && questionnaire.pronouns != undefined 
-        && questionnaire.pronouns.length > 0
-        && questionnaire.age != undefined 
-        && questionnaire.age > 0
-        && questionnaire.timeZone != undefined 
-        && questionnaire.timeZone.length > 0
-        && questionnaire.neuroDifferences != undefined 
-        && questionnaire.neuroDifferences.length > 0
-        && questionnaire.mentalSpecifics != undefined 
-        && questionnaire.mentalSpecifics.length > 0
-        && questionnaire.psyWishes != undefined 
-        && questionnaire.psyWishes.length > 0
-        && questionnaire.psyRequest != undefined 
-        && questionnaire.psyRequest.length > 0
-        && questionnaire.therapyExperience != undefined 
-        && questionnaire.therapyExperience.length > 0;
+        = questionnaire.telegram
+        && questionnaire.email
+        && questionnaire.phone
+        && questionnaire.name
+        && questionnaire.pronouns
+        && questionnaire.age
+        && questionnaire.timeZone
+        && questionnaire.neuroDifferences
+        && questionnaire.mentalSpecifics
+        && questionnaire.psyWishes
+        && questionnaire.psyRequest
+        && questionnaire.therapyExperience;
 
     // Actions
     async function registerQuestionnaire() {
-        Moment.locale(timeLocale);
-        questionnaire.registrationDate = 
-            String(Moment(new Date()).format(dateFormat));
         let questionnaireJson = JSON.stringify(questionnaire);
         
         const response = await axios.post(
-            postQuestionnaireRef, 
+            POST_QUESTIONNAIRE_REF, 
             questionnaireJson,
             {
                 timeout: requestTimeout,
@@ -137,29 +119,29 @@ const QuestionnaireCreator = () => {
     // Render
     return (        
         <FormControl style={questionnaireFormStyle}>
-            <div><Typography variant="h4">{questionnaireCreateHeader}</Typography></div>
+            <div><Typography variant='h4'>{QUESTIONNAIRE_HEADER}</Typography></div>
             <br />
 
             <Accordion defaultExpanded>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header">
-                <Typography variant="h6">{nameHeaderOuter}</Typography>
+                    aria-controls='panel1-content'
+                    id='panel1-header'>
+                <Typography variant='h6'>{NAME_OUTER_HEADER}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <TextField 
-                        label={nameHeaderInner} 
+                        label={NAME_INNER_HEADER} 
                         onChange={e => setQuestionnaire({...questionnaire, name: e.target.value})} 
                         required
                         style={questionnaireEntryStyle}
-                        variant="outlined" />
+                        variant='outlined' />
                     <br />
                     <TextField 
-                        label={pronounHeaderInner}
+                        label={PRONOUN_INNER_HEADER}
                         onChange={e => setQuestionnaire({...questionnaire, pronouns: e.target.value})} 
                         style={questionnaireEntryStyle}
-                        variant="outlined" />
+                        variant='outlined' />
                     <br />
                 </AccordionDetails>
             </Accordion>
@@ -167,32 +149,32 @@ const QuestionnaireCreator = () => {
             <Accordion defaultExpanded>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header">
-                <Typography variant="h6">{contactsHeaderOuter}</Typography>
+                    aria-controls='panel1-content'
+                    id='panel1-header'>
+                <Typography variant='h6'>{CONTACTS_OUTER_HEADER}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <MuiTelInput 
                         defaultCountry='RU'
-                        label={phoneHeaderInner} 
+                        label={PHONE_INNER_HEADER} 
                         onChange={onChangePhone}
                         required
                         value={questionnaire.phone}
                     />
                     <br />
                     <TextField 
-                        label={eMailHeaderInner}
+                        label={EMAIL_INNER_HEADER}
                         onChange={e => setQuestionnaire({...questionnaire, email: e.target.value})} 
                         required
                         style={questionnaireEntryStyle}
-                        variant="outlined" />
+                        variant='outlined' />
                     <br />
                     <TextField 
-                        label={telegramHeaderInner}
+                        label={TELEGRAM_INNER_HEADER}
                         onChange={e => setQuestionnaire({...questionnaire, telegram: e.target.value})} 
                         required
                         style={questionnaireEntryStyle}
-                        variant="outlined" />
+                        variant='outlined' />
                     <br />
                 </AccordionDetails>
             </Accordion>
@@ -200,44 +182,44 @@ const QuestionnaireCreator = () => {
             <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header">
-                <Typography variant="h6">{aboutHeaderOuter}</Typography>
+                    aria-controls='panel1-content'
+                    id='panel1-header'>
+                <Typography variant='h6'>{ABOUT_OUTER_HEADER}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <TextField 
-                        label={ageHeaderInner} 
+                        label={AGE_INNER_HEADER} 
                         onChange={onChangeAge} 
                         required
                         style={questionnaireEntryStyle}
-                        variant="outlined" />
+                        variant='outlined' />
                     <br />
                     <TextField 
-                        label={timezoneHeaderInner}
+                        label={TIMEZONE_INNER_HEADER}
                         onChange={e => setQuestionnaire({...questionnaire, timeZone: e.target.value})}  
                         required
                         style={questionnaireEntryStyle}
-                        variant="outlined" />
+                        variant='outlined' />
                     <br />
                     <TextField 
-                        label={neuroDiffHeaderInner}
+                        label={NEURO_DIFF_INNER_HEADER}
                         multiline
                         onChange={e => setQuestionnaire({...questionnaire, neuroDifferences: e.target.value})} 
                         rows={5}
                         style={questionnaireEntryStyle}
-                        variant="outlined" />
+                        variant='outlined' />
                     <br />
                     <br />
                     <Typography 
                         fontStyle={'italic'} 
-                        variant="body1">{mentalSpecHeaderInner}
+                        variant='body1'>{MENTAL_SPEC_INNER_HEADER}
                     </Typography>
                     <TextField 
                         multiline
                         onChange={e => setQuestionnaire({...questionnaire, mentalSpecifics: e.target.value})} 
                         rows={5}
                         style={questionnaireEntryStyle}
-                        variant="outlined" />
+                        variant='outlined' />
                     <br />
                 </AccordionDetails>
             </Accordion>
@@ -245,22 +227,22 @@ const QuestionnaireCreator = () => {
             <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header">
-                <Typography variant="h6">{psyWishesHeaderOuter}</Typography>
+                    aria-controls='panel1-content'
+                    id='panel1-header'>
+                <Typography variant='h6'>{PSY_WICHES_OUTER_HEADER}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography 
                         fontStyle={'italic'} 
-                        variant="body1">{psyWishesHeaderInner}<br />{psyWishAttentionHeaderInner}
+                        variant='body1'>{PSY_WISHES_INNER_HEADER}<br />{PSY_WISHES_ATNN_INNER_HEADER}
                     </Typography>
                     <TextField 
                         multiline
                         onChange={e => setQuestionnaire({...questionnaire, psyWishes: e.target.value})} 
-                        placeholder={psyWishesPlaceholder}
+                        placeholder={PSY_WISHES_PLACEHOLDER}
                         rows={5}
                         style={questionnaireEntryStyle}
-                        variant="outlined" />
+                        variant='outlined' />
                     <br />
                 </AccordionDetails>
             </Accordion>
@@ -268,19 +250,19 @@ const QuestionnaireCreator = () => {
             <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header">
-                <Typography variant="h6">{psyRequestHeaderOuter}</Typography>
+                    aria-controls='panel1-content'
+                    id='panel1-header'>
+                <Typography variant='h6'>{PSY_REQUEST_OUTER_HEADER}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <TextField 
-                        label={psyRequestHeaderInner} 
+                        label={PSY_REQUEST_INNER_HEADER} 
                         multiline
                         onChange={e => setQuestionnaire({...questionnaire, psyRequest: e.target.value})} 
                         required
                         rows={5}
                         style={questionnaireEntryStyle}
-                        variant="outlined" />
+                        variant='outlined' />
                     <br />
                 </AccordionDetails>
             </Accordion>
@@ -288,37 +270,37 @@ const QuestionnaireCreator = () => {
             <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header">
-                <Typography variant="h6">{therapyExpHeaderOuter}</Typography>
+                    aria-controls='panel1-content'
+                    id='panel1-header'>
+                <Typography variant='h6'>{THERAPY_EXP_OUTER_HEADER}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography
                         fontStyle={'italic'} 
-                        variant="body1">{therapyExpHeaderInner}
+                        variant='body1'>{THERAPY_EXP_INNER_HEADER}
                     </Typography>
                     <TextField 
                         multiline
                         onChange={e => setQuestionnaire({...questionnaire, therapyExperience: e.target.value})} 
                         rows={5}
                         style={questionnaireEntryStyle}
-                        variant="outlined" />
+                        variant='outlined' />
                     <br />
                     <br />
                     <Typography 
                         fontStyle={'italic'} 
-                        variant="body1">{isForPayHeader}
+                        variant='body1'>{IS_FOR_PAY_HEADER}
                     </Typography>
                     <FormControlLabel 
                         control={<Checkbox onChange={e => setQuestionnaire({...questionnaire, isForPay: Boolean(e.target.value)})}/>}  
-                        label={isForPayCheckBoxHeader} />
+                        label={IS_FOR_PAY_CHECK_BOX_HEADER} />
                 </AccordionDetails>
             </Accordion>
 
             <br/>  
             <Typography 
                 fontStyle={'italic'} 
-                variant="body1">{registrationConditionHeader}
+                variant='body1'>{REG_CONDITION_HEADER}
             </Typography>
 
             <Button 
@@ -326,15 +308,15 @@ const QuestionnaireCreator = () => {
                 onClick={registerQuestionnaire}
                 style={questionnaireButtonStyle}
                 variant={'contained'}>
-                    {sendButtonHeader}
+                    {SEND_BUTTON_HEADER}
             </Button>  
             <br/>   
 
             <Link 
-                className="link_field"
-                variant="body2"
+                className='link_field'
+                variant='body2'
                 href={homeRef}>
-                {backToHomeButtonHeader}
+                {BACK_TO_HOME_BUTTON_HEADER}
             </Link>     
             <br/>    
         </FormControl>              

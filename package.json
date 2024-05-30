@@ -18,7 +18,6 @@
     "@mui/x-date-pickers": "^7.3.2",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
-    "moment": "^2.30.1",
     "mui-tel-input": "^5.1.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
