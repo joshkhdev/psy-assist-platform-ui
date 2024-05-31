@@ -4,7 +4,7 @@ export class PsychologistProfile {
     description: string;
     timeZone?: string;
     includingQueries: string;
-    exclusionQueries: string;
+    excludingQueries: string;
     userId?: number;
     isActive?: string;
 
@@ -13,13 +13,13 @@ export class PsychologistProfile {
             this.name = psychologist.name;
             this.description = psychologist.description;
             this.includingQueries = psychologist.includingQueries;
-            this.exclusionQueries = psychologist.exclusionQueries;
+            this.excludingQueries = psychologist.excludingQueries;
         }
         else {
             this.name = '';
             this.description = '';
             this.includingQueries = '';
-            this.exclusionQueries = '';
+            this.excludingQueries = '';
         }
     }
 }

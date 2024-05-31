@@ -10,7 +10,7 @@ export interface Questionnaire {
     neuroDifferences: string;
     mentalSpecifics: string;
     psyWishes: string;
-    psyRequest: string;
+    psyQuery: string;
     therapyExperience: string;
     isForPay: boolean;
 }

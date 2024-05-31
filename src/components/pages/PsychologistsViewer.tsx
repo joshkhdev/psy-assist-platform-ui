@@ -50,7 +50,7 @@ const PsychologistsViewer = () => {
             newCard.name = element.name;
             newCard.description = element.description;
             newCard.includingQueries = element.includingQueries;
-            newCard.exclusionQueries = element.exclusionQueries;
+            newCard.excludingQueries = element.excludingQueries;
             cards.push(newCard);
             index++;
         });
@@ -75,7 +75,7 @@ const PsychologistsViewer = () => {
                         name, 
                         description, 
                         includingQueries, 
-                        exclusionQueries 
+                        excludingQueries: excludingQueries 
                     } = card;
                     
                     return (
@@ -85,8 +85,8 @@ const PsychologistsViewer = () => {
                             psyImage={image}
                             psyName={name}
                             psyDescription={description}
-                            psyRequestsInclude={includingQueries}
-                            psyRequestsExclude={exclusionQueries} />
+                            includingQueries={includingQueries}
+                            excludingQueries={excludingQueries} />
                         <br/>
                     </Grid>
                     );

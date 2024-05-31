@@ -22,8 +22,8 @@ interface Props {
     psyImage: string,
     psyName: string,
     psyDescription: string,
-    psyRequestsInclude: string,
-    psyRequestsExclude: string
+    includingQueries: string,
+    excludingQueries: string
 }
 
 const PsychologistCard = (props: Props) => {
@@ -73,7 +73,7 @@ const PsychologistCard = (props: Props) => {
                 <Typography 
                     variant='body2' 
                     color='text.secondary'>
-                    {props.psyRequestsInclude}
+                    {props.includingQueries}
                 </Typography>
                 <br/>
 
@@ -86,7 +86,7 @@ const PsychologistCard = (props: Props) => {
                 <Typography 
                     variant='body2'
                     color='text.secondary'>
-                    {props.psyRequestsExclude}
+                    {props.excludingQueries}
                 </Typography>
             </CardContent>
 

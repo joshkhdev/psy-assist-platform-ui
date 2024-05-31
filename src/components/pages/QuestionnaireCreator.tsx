@@ -1,3 +1,5 @@
+//#region Imports
+
 // System
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -59,6 +61,8 @@ import {
     POST_QUESTIONNAIRE_REF 
 } from '../../resources/Refs';
 
+//#endregion
+
 const QuestionnaireCreator = () => {   
     // Constants
     const requestTimeout = 5000;
@@ -96,7 +100,7 @@ const QuestionnaireCreator = () => {
         && questionnaire.neuroDifferences
         && questionnaire.mentalSpecifics
         && questionnaire.psyWishes
-        && questionnaire.psyRequest
+        && questionnaire.psyQuery
         && questionnaire.therapyExperience;
 
     // Actions
@@ -265,7 +269,7 @@ const QuestionnaireCreator = () => {
                     <TextField 
                         label={PSY_REQUEST_INNER_HEADER} 
                         multiline
-                        onChange={e => setQuestionnaire({...questionnaire, psyRequest: e.target.value})} 
+                        onChange={e => setQuestionnaire({...questionnaire, psyQuery: e.target.value})} 
                         required
                         rows={5}
                         style={questionnaireEntryStyle}
@@ -281,7 +285,7 @@ const QuestionnaireCreator = () => {
                     id='panel1-header'>
                     <Typography variant='h6'>{THERAPY_EXP_OUTER_HEADER}</Typography>
                 </AccordionSummary>
-                
+
                 <AccordionDetails>
                     <Typography
                         fontStyle={'italic'} 
