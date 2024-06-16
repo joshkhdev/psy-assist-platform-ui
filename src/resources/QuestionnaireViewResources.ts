@@ -1,0 +1,9 @@
+export const NAME = 'Имя';
+export const PRONOUN = 'Как обращаться';
+export const AGE = 'Полных лет';
+export const TIMEZONE = 'Часовой пояс';
+export const NEURO_DIFF = 'Нейроотличия';
+export const MENTAL_SPEC = 'Ментальные особенности';
+export const PSY_WICHES = 'Предпочтения по психологам';
+export const PSY_REQUEST = 'Запрос';
+export const THERAPY_EXP = 'Опыт посещения психолога';
