@@ -12,6 +12,7 @@ import {
     Routes
 } from 'react-router-dom';
 // Components
+import SignIn from './components/pages/SignIn';
 import QuestionnaireCreator from './components/pages/QuestionnaireCreator';
 import QuestionnaireSuccess from './components/pages/QuestionnaireSuccess';
 import PsychologistsViewer from './components/pages/PsychologistsViewer';
@@ -20,7 +21,8 @@ import {
     CREATE_QUESTIONNAIRE_REF, 
     CREATE_QUE_SUCCESS_REF, 
     HOME_REF, 
-    PSYCHOLOGIST_CATALOG_REF 
+    PSYCHOLOGIST_CATALOG_REF,
+    SIGN_IN_REF
 } from './resources/Refs';
 
 //#endregion
@@ -34,6 +36,7 @@ function App() {
             <Routes>
               <Route path={HOME_REF} element={<Home />} />
               {/* подстановочный путь */}
+              <Route path={SIGN_IN_REF} element={<SignIn />} />
               <Route path={CREATE_QUESTIONNAIRE_REF} element={<QuestionnaireCreator />} />
               <Route path={PSYCHOLOGIST_CATALOG_REF} element={<PsychologistsViewer />} />
               <Route path={CREATE_QUE_SUCCESS_REF} element={<QuestionnaireSuccess />} />
