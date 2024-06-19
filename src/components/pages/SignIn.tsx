@@ -18,6 +18,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import FormHelperText from '@mui/material/FormHelperText';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { z } from "zod";
 import { HOME_REF } from '../../resources/Refs';
@@ -30,15 +31,19 @@ import {
     EMAIL_PLACEHOLDER,
     PASSWORD_PLACEHOLDER,
     REMEMBER_ME_HEADER,
-    INCORRECT_EMAIL
+    INCORRECT_EMAIL,
+    EMPTY_FIELD_ERROR
 } from '../../resources/SignInResources';
 
 const defaultTheme = createTheme();
 
 function SignIn() {
     const [showPassword, setShowPassword] = React.useState(false);
+    const [emailIsEmpty, setEmailIsEmpty] = React.useState(false);
+    const [passwordIsEmpty, setPasswordIsEmpty] = React.useState(false);
     const [emailVerify, setEmailVerify] = React.useState(false);
     const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
     const [rememberMe, setRememberMe] = React.useState(false);
 
     const validateEmail = (email: string | null): boolean => {
@@ -52,33 +57,62 @@ function SignIn() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
+        //const data = new FormData(event.currentTarget);
+        var error = false;
 
         if (!email) {
-            setEmailVerify(false);
-            return;
+            setEmailIsEmpty(true);
+            setEmailVerify(true);
+            error = true;
         }
 
-        
+        if (!password) {
+            setPasswordIsEmpty(true);
+            error = true;
+        }
+
+        if (!emailVerify)
+            error = true;
+
+        if (error) return;
+
+        console.log({
+            email: email,//data.get('email'),
+            password: password,//data.get('password'),
+            rememberMe: rememberMe
+          });
     };
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleBlurEmailInput = (e: { target: { value: any; }; }) => {
         const inputEmail = e.target.value;
-        if(!inputEmail)
-            setEmailVerify(true);
-        else if (validateEmail(inputEmail)) {
-        setEmail(inputEmail);
-        setEmailVerify(true);
+        
+        if(!inputEmail) {
+             setEmailIsEmpty(false);
+             setEmailVerify(true);
+        }
+
+        if(inputEmail && !validateEmail(inputEmail)) {
+            setEmailVerify(false);
         } else {
-        setEmailVerify(false);
+            setEmailVerify(true);
+        }
+    
+        if(inputEmail) {
+            setEmail(inputEmail);
         }
     };
 
     const handleFocusEmailInput = () => {
         setEmail("");
+        setEmailIsEmpty(false);
         setEmailVerify(true);
+    };
+
+    const handleFocusPasswordInput = () => {
+        setPassword("");
+        setPasswordIsEmpty(false);
     };
 
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -111,9 +145,9 @@ function SignIn() {
                     id="email"
                     name="email"
                     autoComplete="email"
-                    error = {!emailVerify}
+                    error = {emailIsEmpty || !emailVerify}
                     label={EMAIL_PLACEHOLDER}
-                    helperText= {emailVerify ? "" : INCORRECT_EMAIL}
+                    helperText= {emailIsEmpty ? EMPTY_FIELD_ERROR : (emailVerify ? " " : INCORRECT_EMAIL)}
                     autoFocus
                     onBlur={handleBlurEmailInput}
                     onFocus={handleFocusEmailInput}
@@ -137,7 +171,12 @@ function SignIn() {
                     </InputAdornment>
                     }
                     label={PASSWORD_PLACEHOLDER}
+                    error = {passwordIsEmpty}
+                    onFocus={handleFocusPasswordInput}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onBlur={(e) => setPassword(e.target.value)}
                 />
+                <FormHelperText error={passwordIsEmpty}>{passwordIsEmpty ? EMPTY_FIELD_ERROR : " "}</FormHelperText>
                 </FormControl>
                 
                 <FormControlLabel

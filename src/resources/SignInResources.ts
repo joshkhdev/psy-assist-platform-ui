@@ -6,3 +6,4 @@ export const EMAIL_PLACEHOLDER = 'Email';
 export const PASSWORD_PLACEHOLDER = 'Пароль';
 export const REMEMBER_ME_HEADER = 'Запомнить меня';
 export const INCORRECT_EMAIL = 'Некорректный формат email';
+export const EMPTY_FIELD_ERROR = 'Поле не может быть пустым';
