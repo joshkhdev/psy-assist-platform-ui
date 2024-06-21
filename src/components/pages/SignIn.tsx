@@ -58,7 +58,7 @@ function SignIn() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         //const data = new FormData(event.currentTarget);
-        var error = false;
+        let error = false;
 
         if (!email) {
             setEmailIsEmpty(true);
@@ -77,8 +77,8 @@ function SignIn() {
         if (error) return;
 
         console.log({
-            email: email,//data.get('email'),
-            password: password,//data.get('password'),
+            email: email,
+            password: password,
             rememberMe: rememberMe
           });
     };
@@ -121,101 +121,101 @@ function SignIn() {
 
     return (
         <ThemeProvider theme={defaultTheme}>
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <Box
-            sx={{
-                marginTop: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-            }}
-            >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-                {SIGN_IN_HEADER}
-            </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    name="email"
-                    autoComplete="email"
-                    error = {emailIsEmpty || !emailVerify}
-                    label={EMAIL_PLACEHOLDER}
-                    helperText= {emailIsEmpty ? EMPTY_FIELD_ERROR : (emailVerify ? " " : INCORRECT_EMAIL)}
-                    autoFocus
-                    onBlur={handleBlurEmailInput}
-                    onFocus={handleFocusEmailInput}
-                />
-                <FormControl sx={{ mt: 1 }} variant="outlined" margin="normal" fullWidth required>
-                <InputLabel htmlFor="password">{PASSWORD_PLACEHOLDER}</InputLabel>
-                <OutlinedInput
-                    id="password"
-                    name="password"
-                    type={showPassword ? 'text' : 'password'}
-                    endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                        >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                    </InputAdornment>
-                    }
-                    label={PASSWORD_PLACEHOLDER}
-                    error = {passwordIsEmpty}
-                    onFocus={handleFocusPasswordInput}
-                    onChange={(e) => setPassword(e.target.value)}
-                    onBlur={(e) => setPassword(e.target.value)}
-                />
-                <FormHelperText error={passwordIsEmpty}>{passwordIsEmpty ? EMPTY_FIELD_ERROR : " "}</FormHelperText>
-                </FormControl>
-                
-                <FormControlLabel
-                control={<Checkbox
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                    value="remember" 
-                    color="primary" />
-                }
-                label={REMEMBER_ME_HEADER}
-                />
-                <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Box
+                sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
                 >
-                {SIGN_IN_BUTTON}
-                </Button>
-                <Grid container>
-                <Grid item xs>
-                    <Link href="#" variant="body2">
-                    {FORGOT_PASSWORD_REF}
-                    </Link>
-                </Grid>
-                <Grid item>
-                    <Link href="#" variant="body2">
-                    {SIGN_UP_REF}
-                    </Link>
-                </Grid>
-                </Grid>
-            </Box>
-            </Box>
-            <Link 
-                className='link_field'
-                variant='body2'
-                href={HOME_REF}>
-                {BACK_TO_HOME_BUTTON_HEADER}
-        </Link>
-        </Container>
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    {SIGN_IN_HEADER}
+                </Typography>
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        name="email"
+                        autoComplete="email"
+                        error = {emailIsEmpty || !emailVerify}
+                        label={EMAIL_PLACEHOLDER}
+                        helperText= {emailIsEmpty ? EMPTY_FIELD_ERROR : (emailVerify ? " " : INCORRECT_EMAIL)}
+                        autoFocus
+                        onBlur={handleBlurEmailInput}
+                        onFocus={handleFocusEmailInput}
+                        />
+                        <FormControl sx={{ mt: 1 }} variant="outlined" margin="normal" fullWidth required>
+                        <InputLabel htmlFor="password">{PASSWORD_PLACEHOLDER}</InputLabel>
+                        <OutlinedInput
+                            id="password"
+                            name="password"
+                            type={showPassword ? 'text' : 'password'}
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                                >
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                            }
+                            label={PASSWORD_PLACEHOLDER}
+                            error = {passwordIsEmpty}
+                            onFocus={handleFocusPasswordInput}
+                            onChange={(e) => setPassword(e.target.value)}
+                            onBlur={(e) => setPassword(e.target.value)}
+                        />
+                        <FormHelperText error={passwordIsEmpty}>{passwordIsEmpty ? EMPTY_FIELD_ERROR : " "}</FormHelperText>
+                        </FormControl>
+                        
+                        <FormControlLabel
+                            control={<Checkbox
+                                onChange={(e) => setRememberMe(e.target.checked)}
+                                value="remember" 
+                                color="primary" />
+                            }
+                            label={REMEMBER_ME_HEADER}
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            >
+                            {SIGN_IN_BUTTON}
+                        </Button>
+                        <Grid container>
+                            <Grid item xs>
+                                <Link href="#" variant="body2">
+                                    {FORGOT_PASSWORD_REF}
+                                </Link>
+                            </Grid>
+                            <Grid item>
+                                <Link href="#" variant="body2">
+                                    {SIGN_UP_REF}
+                                </Link>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                </Box>
+                <Link 
+                    className='link_field'
+                    variant='body2'
+                    href={HOME_REF}>
+                    {BACK_TO_HOME_BUTTON_HEADER}
+                </Link>
+            </Container>
         </ThemeProvider>
     );
 }
