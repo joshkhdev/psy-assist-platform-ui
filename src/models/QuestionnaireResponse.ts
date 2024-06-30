@@ -1,3 +1,10 @@
+interface Contact {
+    id: number;
+    telegram: string;
+    email: string;
+    phone: string;
+}
+
 export interface QuestionnaireResponse {
     id: number;
     name: string;
@@ -10,4 +17,5 @@ export interface QuestionnaireResponse {
     psyQuery: string;
     therapyExperience: string;
     isForPay: boolean;
+    contact: Contact;
 }

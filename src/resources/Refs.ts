@@ -12,3 +12,4 @@ export const QUESTIONNAIRE_VIEW_REF = 'questionnairelist/:id';
 export const POST_QUESTIONNAIRE_REF = `${SOURCE_PATH}/questionnaires`;
 export const GET_PSYCHOLOGISTS_REF = `${SOURCE_PATH}/psychologistprofiles`;
 export const GET_QUESTIONNAIRES_REF = `${SOURCE_PATH}/questionnaires`;
+export const GET_QUESTIONNAIRESID_REF = `${SOURCE_PATH}/questionnaires/:id`;
