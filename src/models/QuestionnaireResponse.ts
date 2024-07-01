@@ -1,9 +1,4 @@
-interface Contact {
-    id: number;
-    telegram: string;
-    email: string;
-    phone: string;
-}
+import { Contact } from './Contact';
 
 export interface QuestionnaireResponse {
     id: number;

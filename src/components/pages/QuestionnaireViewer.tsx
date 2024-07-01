@@ -48,8 +48,15 @@ function QuestionnaireViewer() {
     const [questionnaire, setQuestionnaire] = useState<QuestionnaireResponse>();
 
     useEffect(() => {
-        questionnairesData();
+        getQuestionnaireDataAsync();
     }, []);
+
+    async function getQuestionnaireDataAsync() {        
+        const response = await axios.get<string>(GET_QUESTIONNAIRES_REF + '\\' + location.state.id);
+        const data = JSON.parse(JSON.stringify(response.data));
+        console.log(data);
+        setQuestionnaire(data);
+    }
 
     const contents = questionnaire === undefined 
     ? <p><em>Loading...</em></p>
@@ -57,95 +64,95 @@ function QuestionnaireViewer() {
         <div><Typography variant='h4'>{QUESTIONNAIRE_DATA}</Typography></div>            
         <Accordion defaultExpanded>
             <AccordionDetails>
-                <TextField                     
+                <TextField        
+                    inputProps={{readOnly: true, disabled: true}}             
                     label={NAME}
-                    style={questionnaireViewerEntryStyle}
-                    inputProps={{readOnly: true, disabled: true,}}
+                    style={questionnaireViewerEntryStyle}                    
                     variant='outlined' 
                     value={questionnaire.name} />
                     <br /> 
                 <TextField    
+                    inputProps={{readOnly: true, disabled: true}}
                     label={PRONOUN}                       
                     style={questionnaireViewerEntryStyle}
-                    inputProps={{readOnly: true, disabled: true,}}
                     variant='outlined' 
                     value={questionnaire.pronouns} />
                 <br />
-                <TextField       
+                <TextField    
+                    inputProps={{readOnly: true, disabled: true}}   
                     label = {AGE}
                     style={questionnaireViewerEntryStyle}
-                    inputProps={{readOnly: true, disabled: true,}}
                     variant='outlined' 
                     value={questionnaire.age} />
                 <br /> 
-                <TextField        
+                <TextField   
+                    inputProps={{readOnly: true, disabled: true}}     
                     label={TIMEZONE}
                     style={questionnaireViewerEntryStyle}
-                    inputProps={{readOnly: true, disabled: true,}}
                     variant='outlined' 
                     value={questionnaire.timeZone} />
                 <br /> 
-                <TextField          
+                <TextField    
+                    inputProps={{readOnly: true, disabled: true}}      
                     label={PHONE_INNER_HEADER}
                     style={questionnaireViewerEntryStyle}
-                    inputProps={{readOnly: true, disabled: true,}}
                     variant='outlined' 
                     value={questionnaire.contact.phone} />
                 <br />         
-                <TextField        
+                <TextField  
+                    inputProps={{readOnly: true, disabled: true}}      
                     label={EMAIL_INNER_HEADER}
                     style={questionnaireViewerEntryStyle}
-                    inputProps={{readOnly: true, disabled: true,}}
                     variant='outlined' 
                     value={questionnaire.contact.email} />
                 <br />    
-                <TextField          
+                <TextField  
+                    inputProps={{readOnly: true, disabled: true}}        
                     label={TELEGRAM_INNER_HEADER}
                     style={questionnaireViewerEntryStyle}
-                    inputProps={{readOnly: true, disabled: true,}}
                     variant='outlined' 
                     value={questionnaire.contact.telegram} />
                 <br />                         
                 <FormControlLabel 
                     control={<Checkbox  checked={location.state.isForPay}/>}  
                     label={IS_FOR_PAY_CHECK_BOX_HEADER} />    
-                <TextField         
+                <TextField    
+                    inputProps={{readOnly: true, disabled: true}}     
                     label={NEURO_DIFF}
                     multiline
                     style={questionnaireViewerEntryStyle}
-                    inputProps={{readOnly: true, disabled: true,}}
                     variant='outlined' 
                     value={questionnaire.neuroDifferences} />                        
                 <br /> 
-                <TextField       
+                <TextField      
+                    inputProps={{readOnly: true, disabled: true}} 
                     label={MENTAL_SPEC}
                     multiline
                     style={questionnaireViewerEntryStyle}
-                    inputProps={{readOnly: true, disabled: true,}}
                     variant='outlined' 
                     value={questionnaire.mentalSpecifics} />
                 <br />      
-                <TextField          
+                <TextField    
+                    inputProps={{readOnly: true, disabled: true}}      
                     label={PSY_WISHES}
                     multiline
                     style={questionnaireViewerEntryStyle}
-                    inputProps={{readOnly: true, disabled: true,}}
                     variant='outlined' 
                     value={questionnaire.psyWishes}/>
                 <br />       
-                <TextField        
+                <TextField     
+                    inputProps={{readOnly: true, disabled: true}}   
                     label={PSY_REQUEST}
                     multiline
                     style={questionnaireViewerEntryStyle}
-                    inputProps={{readOnly: true, disabled: true,}}
                     variant='outlined' 
                     value={questionnaire.psyQuery}/>
                 <br />  
-                <TextField        
+                <TextField     
+                    inputProps={{readOnly: true, disabled: true}}   
                     label={THERAPY_EXP}
                     multiline
                     style={questionnaireViewerEntryStyle}
-                    inputProps={{readOnly: true, disabled: true,}}
                     variant='outlined'
                     value={questionnaire.therapyExperience} />
                 <br />                    
@@ -165,13 +172,6 @@ function QuestionnaireViewer() {
             {contents}
         </div>
     );
-   
-    async function questionnairesData() {        
-        const response = await axios.get<string>(GET_QUESTIONNAIRES_REF + '\\' + location.state.id);
-        const data = JSON.parse(JSON.stringify(response.data));
-        console.log(data);
-        setQuestionnaire(data);
-    }  
 }
 
 export default QuestionnaireViewer;
