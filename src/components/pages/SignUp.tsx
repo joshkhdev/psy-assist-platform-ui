@@ -1,26 +1,27 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import FormHelperText from '@mui/material/FormHelperText';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { z } from "zod";
-import { HOME_REF } from '../../resources/Refs';
-import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+  FormHelperText,
+  ThemeProvider,
+  createTheme
+} from '@mui/material';
+import {
+  Visibility,
+  VisibilityOff
+} from '@mui/icons-material';
 import {
   SIGN_UP_HEADER,
   SIGN_UP_BUTTON,
@@ -32,6 +33,10 @@ import {
   INCORRECT_EMAIL,
   EMPTY_FIELD_ERROR
 } from '../../resources/SignUpResources';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
+import { HOME_REF } from '../../resources/Refs';
+import { z as zodSchema } from "zod";
 
 const defaultTheme = createTheme();
 
@@ -43,14 +48,14 @@ function SignUp() {
   const [emailIsEmpty, setEmailIsEmpty] = React.useState(false);
   const [passwordIsEmpty, setPasswordIsEmpty] = React.useState(false);
   const [emailVerify, setEmailVerify] = React.useState(true);
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [firstName, setFirstName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
     
   const validateEmail = (email: string | null): boolean => {
     try {
-      z.string().email().parse(email);
+      zodSchema.string().email().parse(email);
       return true;
     } catch {
       return false;
@@ -59,7 +64,7 @@ function SignUp() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    
     let error = false;
 
     if (!email) {
@@ -89,12 +94,13 @@ function SignUp() {
     if (error) return;
 
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
     });
   };
-    
-
+  
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleBlurEmailInput = (e: { target: { value: any; }; }) => {
@@ -117,23 +123,23 @@ function SignUp() {
   };
 
   const handleFocusEmailInput = () => {
-    setEmail("");
+    setEmail('');
     setEmailIsEmpty(false);
     setEmailVerify(true);
   };
 
   const handleFocusFirstNameInput = () => {
-    setFirstName("");
+    setFirstName('');
     setFirstNameIsEmpty(false);
   };
 
   const handleFocusLastNameInput = () => {
-    setLastName("");
+    setLastName('');
     setLastNameIsEmpty(false);
   };
 
   const handleFocusPasswordInput = () => {
-    setPassword("");
+    setPassword('');
     setPasswordIsEmpty(false);
   };
 
@@ -143,110 +149,110 @@ function SignUp() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            alignItems: 'center',
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            marginTop: 8
           }}>
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ bgcolor: 'secondary.main', m: 1 }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             {SIGN_UP_HEADER}
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <Grid item xs={12} sm={6}>
+          <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Grid item sm={6} xs={12}>
             <TextField
-              margin="normal"
-              autoComplete="given-name"
-              name="firstName"
-              required
-              fullWidth
-              id="firstName"
-              error = {firstNameIsEmpty}
-              label={FIRST_NAME_PLACEHOLDER}
-              helperText= {firstNameIsEmpty ? EMPTY_FIELD_ERROR : " "}
+              autoComplete='given-name'
               autoFocus
-              onFocus={handleFocusFirstNameInput}
-              onChange={(e) => setFirstName(e.target.value)}
+              error = {firstNameIsEmpty}
+              fullWidth
+              helperText= {firstNameIsEmpty ? EMPTY_FIELD_ERROR : ' '}
+              id='firstName'
+              label={FIRST_NAME_PLACEHOLDER}
+              margin='normal'
+              name='firstName'
+              required
               onBlur={(e) => setFirstName(e.target.value)}
+              onChange={(e) => setFirstName(e.target.value)}
+              onFocus={handleFocusFirstNameInput}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item sm={6} xs={12}>
             <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="lastName"
+              autoComplete='family-name'
               error = {lastNameIsEmpty}
+              fullWidth
+              helperText= {lastNameIsEmpty ? EMPTY_FIELD_ERROR : ' '}
+              id='lastName'
               label={LAST_NAME_PLACEHOLDER}
-              helperText= {lastNameIsEmpty ? EMPTY_FIELD_ERROR : " "}
-              name="lastName"
-              autoComplete="family-name"
-              onFocus={handleFocusLastNameInput}
-              onChange={(e) => setLastName(e.target.value)}
+              margin='normal'
+              name='lastName'
+              required
               onBlur={(e) => setLastName(e.target.value)}
+              onChange={(e) => setLastName(e.target.value)}
+              onFocus={handleFocusLastNameInput}
             />
             <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              name="email"
-              autoComplete="email"
+              autoComplete='email'
               error = {emailIsEmpty || !emailVerify}
+              fullWidth
+              helperText= {emailIsEmpty ? EMPTY_FIELD_ERROR : (emailVerify ? ' ' : INCORRECT_EMAIL)}
+              id='email'
               label={EMAIL_PLACEHOLDER}
-              helperText= {emailIsEmpty ? EMPTY_FIELD_ERROR : (emailVerify ? " " : INCORRECT_EMAIL)}
+              margin='normal'
+              name='email'
+              required
               onBlur={handleBlurEmailInput}
               onFocus={handleFocusEmailInput}
             />
-            <FormControl sx={{ mt: 1 }} variant="outlined" margin="normal" fullWidth required>
-            <InputLabel htmlFor="password">{PASSWORD_PLACEHOLDER}</InputLabel>
+            <FormControl fullWidth margin='normal' required sx={{ mt: 1 }} variant='outlined'>
+            <InputLabel htmlFor='password'>{PASSWORD_PLACEHOLDER}</InputLabel>
             <OutlinedInput
-              id="password"
-              name="password"
-              type={showPassword ? 'text' : 'password'}
               endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end">
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
+                <InputAdornment position='end'>
+                  <IconButton
+                  aria-label='toggle password visibility'
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge='end'>
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
               }
-              label={PASSWORD_PLACEHOLDER}
               error = {passwordIsEmpty}
-              onFocus={handleFocusPasswordInput}
-              onChange={(e) => setPassword(e.target.value)}
+              id='password'
+              label={PASSWORD_PLACEHOLDER}
+              name='password'
+              type={showPassword ? 'text' : 'password'}
               onBlur={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
+              onFocus={handleFocusPasswordInput}
             />
-            <FormHelperText error={passwordIsEmpty}>{passwordIsEmpty ? EMPTY_FIELD_ERROR : " "}</FormHelperText>
+            <FormHelperText error={passwordIsEmpty}>{passwordIsEmpty ? EMPTY_FIELD_ERROR : ' '}</FormHelperText>
             </FormControl>
           </Grid>
           <Button
-            type="submit"
             fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}>
+            sx={{ mt: 3, mb: 2 }}
+            type='submit'
+            variant='contained'>
             {SIGN_UP_BUTTON}
           </Button>
-          <Grid container justifyContent="flex-begin">
+          <Grid container justifyContent='flex-begin'>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href='#' variant='body2'>
                 {SIGN_IN_REF}
               </Link>
             </Grid>
             <Link 
               className='link_field'
-              variant='body2'
-              href={HOME_REF}>
+              href={HOME_REF}
+              variant='body2'>
               {BACK_TO_HOME_BUTTON_HEADER}
             </Link>
           </Grid>
