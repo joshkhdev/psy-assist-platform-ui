@@ -27,7 +27,7 @@ import {
     PSYCHOLOGIST_CATALOG_REF,
     QUESTIONNAIRE_LIST_REF,
     QUESTIONNAIRE_VIEW_REF,
-    SIGN_IN_REF
+    SIGN_IN_REF,
     SIGN_UP_REF
 } from './resources/Refs';
 
