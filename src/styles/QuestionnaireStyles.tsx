@@ -15,3 +15,15 @@ export const questionnaireButtonStyle = {
     marginTop: '20px',
     width: '120px'
 };
+
+export const questionnaireViewerFormStyle = {
+    padding: '20px',
+    background: '#f5f5f5'
+};
+
+export const questionnaireViewerEntryStyle = {
+    backgroundColor: '#ffffff',
+    marginTop: '15px',
+    minWidth: '260px',
+    width: '95%'
+};
