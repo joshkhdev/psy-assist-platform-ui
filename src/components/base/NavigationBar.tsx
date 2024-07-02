@@ -7,6 +7,7 @@ import {
     HOME_REF, 
     PSYCHOLOGIST_CATALOG_REF,
     QUESTIONNAIRE_LIST_REF,
+    SIGN_IN_REF
     SIGN_UP_REF
 } from '../../resources/Refs';
 
@@ -19,6 +20,7 @@ function NavigationBar() {
             <Navbar.Brand href={HOME_REF}>Psy Assist Platform</Navbar.Brand>
             <Nav className="me-auto">
                 <Nav.Link href={HOME_REF}>В Начало</Nav.Link>
+                <Nav.Link href={SIGN_IN_REF}>Вход</Nav.Link>
                 <Nav.Link href={CREATE_QUESTIONNAIRE_REF}>Оставить заявку</Nav.Link>
                 <Nav.Link href={PSYCHOLOGIST_CATALOG_REF}>Каталог психологов</Nav.Link>
                 <Nav.Link href={QUESTIONNAIRE_LIST_REF}>Список заявок</Nav.Link>
