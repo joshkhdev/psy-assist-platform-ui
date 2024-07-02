@@ -1,28 +1,29 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import FormHelperText from '@mui/material/FormHelperText';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { z } from "zod";
-import { HOME_REF } from '../../resources/Refs';
-import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
+import {
+    Avatar,
+    Button,
+    CssBaseline,
+    TextField,
+    FormControlLabel,
+    Checkbox,
+    Link,
+    Grid,
+    Box,
+    Typography,
+    Container,
+    FormControl,
+    InputLabel,
+    OutlinedInput,
+    InputAdornment,
+    IconButton,
+    FormHelperText,
+    ThemeProvider,
+    createTheme
+} from '@mui/material';
+import {
+    Visibility,
+    VisibilityOff
+} from '@mui/icons-material';
 import {
     FORGOT_PASSWORD_REF,
     SIGN_UP_REF,
@@ -34,6 +35,10 @@ import {
     INCORRECT_EMAIL,
     EMPTY_FIELD_ERROR
 } from '../../resources/SignInResources';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
+import { HOME_REF } from '../../resources/Refs';
+import { z as zodSchema } from 'zod';
 
 const defaultTheme = createTheme();
 
@@ -42,13 +47,13 @@ function SignIn() {
     const [emailIsEmpty, setEmailIsEmpty] = React.useState(false);
     const [passwordIsEmpty, setPasswordIsEmpty] = React.useState(false);
     const [emailVerify, setEmailVerify] = React.useState(false);
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
     const [rememberMe, setRememberMe] = React.useState(false);
 
     const validateEmail = (email: string | null): boolean => {
         try {
-          z.string().email().parse(email);
+          zodSchema.string().email().parse(email);
           return true;
         } catch {
           return false;
@@ -57,7 +62,7 @@ function SignIn() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        //const data = new FormData(event.currentTarget);
+        
         let error = false;
 
         if (!email) {
@@ -80,7 +85,7 @@ function SignIn() {
             email: email,
             password: password,
             rememberMe: rememberMe
-          });
+        });
     };
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -105,13 +110,13 @@ function SignIn() {
     };
 
     const handleFocusEmailInput = () => {
-        setEmail("");
+        setEmail('');
         setEmailIsEmpty(false);
         setEmailVerify(true);
     };
 
     const handleFocusPasswordInput = () => {
-        setPassword("");
+        setPassword('');
         setPasswordIsEmpty(false);
     };
 
@@ -121,88 +126,88 @@ function SignIn() {
 
     return (
         <ThemeProvider theme={defaultTheme}>
-            <Container component="main" maxWidth="xs">
+            <Container component='main' maxWidth='xs'>
                 <CssBaseline />
                 <Box
                 sx={{
-                    marginTop: 8,
+                    alignItems: 'center',
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
+                    marginTop: 8
                 }}
                 >
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <Avatar sx={{ bgcolor: 'secondary.main', m: 1 }}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography component='h1' variant='h5'>
                     {SIGN_IN_HEADER}
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                     <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        name="email"
-                        autoComplete="email"
-                        error = {emailIsEmpty || !emailVerify}
-                        label={EMAIL_PLACEHOLDER}
-                        helperText= {emailIsEmpty ? EMPTY_FIELD_ERROR : (emailVerify ? " " : INCORRECT_EMAIL)}
+                        autoComplete='email'
                         autoFocus
+                        error = {emailIsEmpty || !emailVerify}
+                        fullWidth
+                        id='email'
+                        helperText= {emailIsEmpty ? EMPTY_FIELD_ERROR : (emailVerify ? ' ' : INCORRECT_EMAIL)}
+                        label={EMAIL_PLACEHOLDER}
+                        margin='normal'
+                        name='email'
+                        required
                         onBlur={handleBlurEmailInput}
                         onFocus={handleFocusEmailInput}
                         />
-                        <FormControl sx={{ mt: 1 }} variant="outlined" margin="normal" fullWidth required>
-                        <InputLabel htmlFor="password">{PASSWORD_PLACEHOLDER}</InputLabel>
+                        <FormControl fullWidth margin='normal' required sx={{ mt: 1 }} variant='outlined'>
+                        <InputLabel htmlFor='password'>{PASSWORD_PLACEHOLDER}</InputLabel>
                         <OutlinedInput
-                            id="password"
-                            name="password"
-                            type={showPassword ? 'text' : 'password'}
                             endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end"
-                                >
-                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                            </InputAdornment>
+                                <InputAdornment position='end'>
+                                    <IconButton
+                                    aria-label='toggle password visibility'
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge='end'
+                                    >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
                             }
-                            label={PASSWORD_PLACEHOLDER}
                             error = {passwordIsEmpty}
-                            onFocus={handleFocusPasswordInput}
-                            onChange={(e) => setPassword(e.target.value)}
+                            id='password'
+                            label={PASSWORD_PLACEHOLDER}
+                            name='password'
+                            type={showPassword ? 'text' : 'password'}
                             onBlur={(e) => setPassword(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
+                            onFocus={handleFocusPasswordInput}
                         />
-                        <FormHelperText error={passwordIsEmpty}>{passwordIsEmpty ? EMPTY_FIELD_ERROR : " "}</FormHelperText>
+                        <FormHelperText error={passwordIsEmpty}>{passwordIsEmpty ? EMPTY_FIELD_ERROR : ' '}</FormHelperText>
                         </FormControl>
                         
                         <FormControlLabel
                             control={<Checkbox
-                                onChange={(e) => setRememberMe(e.target.checked)}
-                                value="remember" 
-                                color="primary" />
+                                color='primary'
+                                value='remember' 
+                                onChange={(e) => setRememberMe(e.target.checked)} />
                             }
                             label={REMEMBER_ME_HEADER}
                         />
                         <Button
-                            type="submit"
                             fullWidth
-                            variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            type='submit'
+                            variant='contained'
                             >
                             {SIGN_IN_BUTTON}
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2">
+                                <Link href='#' variant='body2'>
                                     {FORGOT_PASSWORD_REF}
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link href='#' variant='body2'>
                                     {SIGN_UP_REF}
                                 </Link>
                             </Grid>
@@ -211,8 +216,8 @@ function SignIn() {
                 </Box>
                 <Link 
                     className='link_field'
-                    variant='body2'
-                    href={HOME_REF}>
+                    href={HOME_REF}
+                    variant='body2'>
                     {BACK_TO_HOME_BUTTON_HEADER}
                 </Link>
             </Container>
