@@ -70,7 +70,7 @@ const QuestionnaireCreator = () => {
     
     // HOCs
     const [questionnaire, setQuestionnaire] = useState<Partial<Questionnaire>>({});
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     // Properties On Change
     const onChangePhone = (value: any) => {
@@ -105,7 +105,7 @@ const QuestionnaireCreator = () => {
 
     // Actions
     async function registerQuestionnaire() {
-        let questionnaireJson = JSON.stringify(questionnaire);
+        const questionnaireJson = JSON.stringify(questionnaire);
         
         const response = await axios.post(
             POST_QUESTIONNAIRE_REF, 
@@ -120,7 +120,7 @@ const QuestionnaireCreator = () => {
         if (response.statusText === 'OK') {
             navigate(`../${CREATE_QUE_SUCCESS_REF}`);
         }
-    };
+    }
 
     // Render
     return (        

@@ -17,6 +17,7 @@ import QuestionnaireSuccess from './components/pages/QuestionnaireSuccess';
 import PsychologistsViewer from './components/pages/PsychologistsViewer';
 import QuestionnairesList from './components/pages/QuestionnairesList';
 import QuestionnaireViewer from './components/pages/QuestionnaireViewer';
+import SignUp from './components/pages/SignUp';
 // Styles and Resources
 import { 
     CREATE_QUESTIONNAIRE_REF, 
@@ -24,7 +25,8 @@ import {
     HOME_REF, 
     PSYCHOLOGIST_CATALOG_REF,
     QUESTIONNAIRE_LIST_REF,
-    QUESTIONNAIRE_VIEW_REF 
+    QUESTIONNAIRE_VIEW_REF,
+    SIGN_UP_REF
 } from './resources/Refs';
 
 //#endregion
@@ -43,6 +45,7 @@ function App() {
               <Route path={CREATE_QUE_SUCCESS_REF} element={<QuestionnaireSuccess />} />
               <Route path={QUESTIONNAIRE_LIST_REF} element={<QuestionnairesList />} />
               <Route path={QUESTIONNAIRE_VIEW_REF} element={<QuestionnaireViewer />} />
+              <Route path={SIGN_UP_REF} element={<SignUp />} />
               <Route path='*' element={<Home />} />
             </Routes>
           </BrowserRouter>
