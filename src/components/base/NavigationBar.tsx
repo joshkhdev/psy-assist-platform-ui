@@ -8,6 +8,7 @@ import {
     PSYCHOLOGIST_CATALOG_REF,
     QUESTIONNAIRE_LIST_REF,
     SIGN_IN_REF
+    SIGN_UP_REF
 } from '../../resources/Refs';
 
 function NavigationBar() {    
@@ -23,6 +24,7 @@ function NavigationBar() {
                 <Nav.Link href={CREATE_QUESTIONNAIRE_REF}>Оставить заявку</Nav.Link>
                 <Nav.Link href={PSYCHOLOGIST_CATALOG_REF}>Каталог психологов</Nav.Link>
                 <Nav.Link href={QUESTIONNAIRE_LIST_REF}>Список заявок</Nav.Link>
+                <Nav.Link href={SIGN_UP_REF}>Регистрация</Nav.Link>
             </Nav>
             </Container>
         </Navbar>        

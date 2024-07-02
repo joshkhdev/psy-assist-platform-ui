@@ -8,6 +8,7 @@ export const PSYCHOLOGIST_CATALOG_REF = 'psychologists';
 export const QUESTIONNAIRE_LIST_REF = 'questionnairelist';
 export const QUESTIONNAIRE_VIEW_REF = 'questionnairelist/:id';
 export const SIGN_IN_REF = 'signin';
+export const SIGN_UP_REF = "signup";
 
 // Request refs
 export const POST_QUESTIONNAIRE_REF = `${SOURCE_PATH}/questionnaires`;

@@ -45,7 +45,7 @@ const PsychologistsViewer = () => {
         cards = [];
         let index = 0;
         sliderObjects.forEach((element) => {
-            let newCard = new PsychologistProfileCard();
+            const newCard = new PsychologistProfileCard();
             newCard.image = CAT_PICS[index];
             newCard.name = element.name;
             newCard.description = element.description;
@@ -56,7 +56,7 @@ const PsychologistsViewer = () => {
         });
         
         setCards(cards);
-    };
+    }
   
     // Render
     return (
