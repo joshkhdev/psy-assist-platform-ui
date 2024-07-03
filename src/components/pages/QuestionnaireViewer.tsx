@@ -97,21 +97,21 @@ function QuestionnaireViewer() {
                     label={PHONE_INNER_HEADER}
                     style={questionnaireViewerEntryStyle}
                     variant='outlined' 
-                    value={questionnaire.contact.phone} />
+                    value={questionnaire.phone} />
                 <br />         
                 <TextField  
                     inputProps={{readOnly: true, disabled: true}}      
                     label={EMAIL_INNER_HEADER}
                     style={questionnaireViewerEntryStyle}
                     variant='outlined' 
-                    value={questionnaire.contact.email} />
+                    value={questionnaire.email} />
                 <br />    
                 <TextField  
                     inputProps={{readOnly: true, disabled: true}}        
                     label={TELEGRAM_INNER_HEADER}
                     style={questionnaireViewerEntryStyle}
                     variant='outlined' 
-                    value={questionnaire.contact.telegram} />
+                    value={questionnaire.telegram} />
                 <br />                         
                 <FormControlLabel 
                     control={<Checkbox  checked={location.state.isForPay}/>}  
