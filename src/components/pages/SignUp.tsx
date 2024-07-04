@@ -25,18 +25,23 @@ import {
 import {
   SIGN_UP_HEADER,
   SIGN_UP_BUTTON,
-  SIGN_IN_REF,
+  SIGN_IN_REF_TEXT,
   FIRST_NAME_PLACEHOLDER,
   LAST_NAME_PLACEHOLDER,
   EMAIL_PLACEHOLDER,
   PASSWORD_PLACEHOLDER,
   INCORRECT_EMAIL,
   EMPTY_FIELD_ERROR
-} from '../../resources/SignUpResources';
+} from '../../resources/SignInUpResources';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
-import { HOME_REF } from '../../resources/Refs';
-import { z as zodSchema } from "zod";
+import { HOME_REF, SIGN_IN_REF } from '../../resources/Refs';
+import {
+  handleBlurInput,
+  validateEmail,
+  validateInput,
+  handleFocusInput
+} from '../common/Validation';
 
 const defaultTheme = createTheme();
 
@@ -52,46 +57,18 @@ function SignUp() {
   const [lastName, setLastName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-    
-  const validateEmail = (email: string | null): boolean => {
-    try {
-      zodSchema.string().email().parse(email);
-      return true;
-    } catch {
-      return false;
-    }
-  };
-
+  
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     
-    let error = false;
+    let allChecked = true;
 
-    if (!email) {
-        setEmailIsEmpty(true);
-        setEmailVerify(true);
-        error = true;
-    }
+    allChecked = validateInput(allChecked, email, setEmailIsEmpty, setEmailVerify, validateEmail);
+    allChecked = validateInput(allChecked, firstName, setFirstNameIsEmpty);
+    allChecked = validateInput(allChecked, lastName, setLastNameIsEmpty);
+    allChecked = validateInput(allChecked, password, setPasswordIsEmpty);
 
-    if (!firstName) {
-        setFirstNameIsEmpty(true);
-        error = true;
-    }
-
-    if (!lastName) {
-        setLastNameIsEmpty(true);
-        error = true;
-    }
-
-    if (!password) {
-        setPasswordIsEmpty(true);
-        error = true;
-    }
-
-    if (!emailVerify)
-        error = true;
-
-    if (error) return;
+    if (!allChecked) return;
 
     console.log({
       firstName: firstName,
@@ -102,46 +79,6 @@ function SignUp() {
   };
   
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleBlurEmailInput = (e: { target: { value: any; }; }) => {
-    const inputEmail = e.target.value;
-    
-    if(!inputEmail) {
-      setEmailIsEmpty(false);
-      setEmailVerify(true);
-    }
-
-    if(inputEmail && !validateEmail(inputEmail)) {
-      setEmailVerify(false);
-    } else {
-      setEmailVerify(true);
-    }
-
-    if(inputEmail) {
-      setEmail(inputEmail);
-    }
-  };
-
-  const handleFocusEmailInput = () => {
-    setEmail('');
-    setEmailIsEmpty(false);
-    setEmailVerify(true);
-  };
-
-  const handleFocusFirstNameInput = () => {
-    setFirstName('');
-    setFirstNameIsEmpty(false);
-  };
-
-  const handleFocusLastNameInput = () => {
-    setLastName('');
-    setLastNameIsEmpty(false);
-  };
-
-  const handleFocusPasswordInput = () => {
-    setPassword('');
-    setPasswordIsEmpty(false);
-  };
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -179,7 +116,7 @@ function SignUp() {
               required
               onBlur={(e) => setFirstName(e.target.value)}
               onChange={(e) => setFirstName(e.target.value)}
-              onFocus={handleFocusFirstNameInput}
+              onFocus={() => handleFocusInput(setFirstName, setFirstNameIsEmpty)}
             />
           </Grid>
           <Grid item sm={6} xs={12}>
@@ -195,7 +132,7 @@ function SignUp() {
               required
               onBlur={(e) => setLastName(e.target.value)}
               onChange={(e) => setLastName(e.target.value)}
-              onFocus={handleFocusLastNameInput}
+              onFocus={() => handleFocusInput(setLastName, setLastNameIsEmpty)}
             />
             <TextField
               autoComplete='email'
@@ -207,8 +144,8 @@ function SignUp() {
               margin='normal'
               name='email'
               required
-              onBlur={handleBlurEmailInput}
-              onFocus={handleFocusEmailInput}
+              onBlur={(e) => handleBlurInput(e.target.value, setEmail, setEmailIsEmpty, setEmailVerify, validateEmail)}
+              onFocus={() => handleFocusInput(setEmail, setEmailIsEmpty, setEmailVerify)}
             />
             <FormControl fullWidth margin='normal' required sx={{ mt: 1 }} variant='outlined'>
             <InputLabel htmlFor='password'>{PASSWORD_PLACEHOLDER}</InputLabel>
@@ -231,7 +168,7 @@ function SignUp() {
               type={showPassword ? 'text' : 'password'}
               onBlur={(e) => setPassword(e.target.value)}
               onChange={(e) => setPassword(e.target.value)}
-              onFocus={handleFocusPasswordInput}
+              onFocus={() => handleFocusInput(setPassword, setPasswordIsEmpty)}
             />
             <FormHelperText error={passwordIsEmpty}>{passwordIsEmpty ? EMPTY_FIELD_ERROR : ' '}</FormHelperText>
             </FormControl>
@@ -245,8 +182,10 @@ function SignUp() {
           </Button>
           <Grid container justifyContent='flex-begin'>
             <Grid item>
-              <Link href='#' variant='body2'>
-                {SIGN_IN_REF}
+              <Link 
+                href={SIGN_IN_REF} 
+                variant='body2'>
+                {SIGN_IN_REF_TEXT}
               </Link>
             </Grid>
             <Link 
