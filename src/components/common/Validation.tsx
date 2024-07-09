@@ -1,12 +1,8 @@
 import { z as zodSchema } from 'zod';
 
 export const validateEmail = (email: string | null): boolean => {
-    try {
-      zodSchema.string().email().parse(email);
-      return true;
-    } catch {
-      return false;
-    }
+    const result = zodSchema.string().email().safeParse(email);
+    return result.success;
 };
 
 export const validateInput = (
