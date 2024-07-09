@@ -26,7 +26,7 @@ import {
 } from '@mui/icons-material';
 import {
     FORGOT_PASSWORD_REF,
-    SIGN_UP_REF,
+    SIGN_UP_REF_TEXT,
     SIGN_IN_HEADER,
     SIGN_IN_BUTTON,
     EMAIL_PLACEHOLDER,
@@ -34,11 +34,16 @@ import {
     REMEMBER_ME_HEADER,
     INCORRECT_EMAIL,
     EMPTY_FIELD_ERROR
-} from '../../resources/SignInResources';
+} from '../../resources/SignInUpResources';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
-import { HOME_REF } from '../../resources/Refs';
-import { z as zodSchema } from 'zod';
+import { HOME_REF, SIGN_UP_REF } from '../../resources/Refs';
+import {
+    handleBlurInput,
+    validateEmail,
+    validateInput,
+    handleFocusInput
+} from '../common/Validation';
 
 const defaultTheme = createTheme();
 
@@ -51,35 +56,15 @@ function SignIn() {
     const [password, setPassword] = React.useState('');
     const [rememberMe, setRememberMe] = React.useState(false);
 
-    const validateEmail = (email: string | null): boolean => {
-        try {
-          zodSchema.string().email().parse(email);
-          return true;
-        } catch {
-          return false;
-        }
-      };
-
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         
-        let error = false;
+        let allChecked = true;
 
-        if (!email) {
-            setEmailIsEmpty(true);
-            setEmailVerify(true);
-            error = true;
-        }
+        allChecked = validateInput(allChecked, email, setEmailIsEmpty, setEmailVerify, validateEmail);
+        allChecked = validateInput(allChecked, password, setPasswordIsEmpty);
 
-        if (!password) {
-            setPasswordIsEmpty(true);
-            error = true;
-        }
-
-        if (!emailVerify)
-            error = true;
-
-        if (error) return;
+        if (!allChecked) return;
 
         console.log({
             email: email,
@@ -89,36 +74,6 @@ function SignIn() {
     };
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleBlurEmailInput = (e: { target: { value: any; }; }) => {
-        const inputEmail = e.target.value;
-        
-        if(!inputEmail) {
-             setEmailIsEmpty(false);
-             setEmailVerify(true);
-        }
-
-        if(inputEmail && !validateEmail(inputEmail)) {
-            setEmailVerify(false);
-        } else {
-            setEmailVerify(true);
-        }
-    
-        if(inputEmail) {
-            setEmail(inputEmail);
-        }
-    };
-
-    const handleFocusEmailInput = () => {
-        setEmail('');
-        setEmailIsEmpty(false);
-        setEmailVerify(true);
-    };
-
-    const handleFocusPasswordInput = () => {
-        setPassword('');
-        setPasswordIsEmpty(false);
-    };
 
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -154,8 +109,8 @@ function SignIn() {
                         margin='normal'
                         name='email'
                         required
-                        onBlur={handleBlurEmailInput}
-                        onFocus={handleFocusEmailInput}
+                        onBlur={(e) => handleBlurInput(e.target.value, setEmail, setEmailIsEmpty, setEmailVerify, validateEmail)}
+                        onFocus={() => handleFocusInput(setEmail, setEmailIsEmpty, setEmailVerify)}
                         />
                         <FormControl fullWidth margin='normal' required sx={{ mt: 1 }} variant='outlined'>
                         <InputLabel htmlFor='password'>{PASSWORD_PLACEHOLDER}</InputLabel>
@@ -179,7 +134,7 @@ function SignIn() {
                             type={showPassword ? 'text' : 'password'}
                             onBlur={(e) => setPassword(e.target.value)}
                             onChange={(e) => setPassword(e.target.value)}
-                            onFocus={handleFocusPasswordInput}
+                            onFocus={() => handleFocusInput(setPassword, setPasswordIsEmpty)}
                         />
                         <FormHelperText error={passwordIsEmpty}>{passwordIsEmpty ? EMPTY_FIELD_ERROR : ' '}</FormHelperText>
                         </FormControl>
@@ -207,8 +162,10 @@ function SignIn() {
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href='#' variant='body2'>
-                                    {SIGN_UP_REF}
+                                <Link 
+                                    href={SIGN_UP_REF} 
+                                    variant='body2'>
+                                    {SIGN_UP_REF_TEXT}
                                 </Link>
                             </Grid>
                         </Grid>

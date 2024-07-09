@@ -1,9 +1,0 @@
-export const SIGN_UP_HEADER = 'Регистрация';
-export const SIGN_UP_BUTTON = 'Зарегистрироваться';
-export const SIGN_IN_REF = 'Уже зарегистрированы? Войти';
-export const FIRST_NAME_PLACEHOLDER = 'Имя';
-export const LAST_NAME_PLACEHOLDER = 'Фамилия';
-export const EMAIL_PLACEHOLDER = 'Email';
-export const PASSWORD_PLACEHOLDER = 'Пароль';
-export const INCORRECT_EMAIL = 'Некорректный формат email';
-export const EMPTY_FIELD_ERROR = 'Поле не может быть пустым';
