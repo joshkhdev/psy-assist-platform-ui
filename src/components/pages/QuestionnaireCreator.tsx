@@ -22,11 +22,7 @@ import { MuiTelInput } from 'mui-tel-input';
 // Classes
 import { Questionnaire } from '../../models/Questionnaire';
 // Styles and Resources
-import { 
-    questionnaireFormStyle, 
-    questionnaireEntryStyle, 
-    questionnaireButtonStyle 
-} from '../../styles/QuestionnaireStyles';
+import { questionnaireFormStyle, questionnaireEntryStyle, questionnaireButtonStyle } from '../../styles/QuestionnaireStyles';
 import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
 import { 
     ABOUT_OUTER_HEADER, 
@@ -55,11 +51,7 @@ import {
     THERAPY_EXP_OUTER_HEADER, 
     TIMEZONE_INNER_HEADER 
 } from '../../resources/QuestionnaireCreatorResources';
-import { 
-    CREATE_QUE_SUCCESS_REF,
-    HOME_REF, 
-    POST_QUESTIONNAIRE_REF 
-} from '../../resources/Refs';
+import { CREATE_QUE_SUCCESS_REF, HOME_REF, POST_QUESTIONNAIRE_REF } from '../../resources/Refs';
 
 //#endregion
 

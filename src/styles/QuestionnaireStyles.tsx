@@ -1,7 +1,7 @@
 export const questionnaireFormStyle = {
+    width: '100%',
     padding: '50px',
     background: '#f5f5f5',
-    width: '70%'
 };
 
 export const questionnaireEntryStyle = {

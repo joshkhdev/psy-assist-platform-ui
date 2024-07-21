@@ -5,6 +5,7 @@ import { GET_QUESTIONNAIRES_REF, HOME_REF } from '../../resources/Refs';
 import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
 import { Link } from '@mui/material';
 import { QuestionnaireResponse } from '../../models/QuestionnaireResponse';
+import { questionnaireListContentStyle } from '../../styles/QuestionnairesListStyles';
 
 function QuestionnairesList() {
 
@@ -53,8 +54,8 @@ function QuestionnairesList() {
         </table>;    
 
     return (
-        <div>
-            <h1 id='tabelLabel'>Список заявок</h1>
+        <div style={questionnaireListContentStyle}>
+            <h2 id='tabelLabel'>Список заявок</h2>
             {contents} 
             <Link 
                 className='link_field'
