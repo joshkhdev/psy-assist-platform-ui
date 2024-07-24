@@ -17,6 +17,7 @@ export const questionnaireButtonStyle = {
 };
 
 export const questionnaireViewerFormStyle = {
+    width: '100%',
     padding: '20px',
     background: '#f5f5f5'
 };
