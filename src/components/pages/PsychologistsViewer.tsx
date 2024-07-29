@@ -4,26 +4,16 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 // MUI
-import { 
-    FormControl,
-    Grid,
-    Link
-} from '@mui/material';
+import { FormControl,Grid, Link } from '@mui/material';
 // Components
-import NavigationBar from '../base/NavigationBar';
 import PsychologistCard from '../base/PsychologistCard';
 // Classes
 import { PsychologistProfile } from '../../models/PsychologistProfile';
 import { PsychologistProfileCard } from '../../models/PsychologistProfileCard';
 // Styles and Resources
 import { psychologistFormStyle } from '../../styles/PsychologistViewerStyles';
-import { 
-    GET_PSYCHOLOGISTS_REF, 
-    HOME_REF 
-} from '../../resources/Refs';
-import { 
-    CAT_PICS, 
-    PSY_PAGE_HEADER } from '../../resources/PsychologistsViewerResources';
+import { GET_PSYCHOLOGISTS_REF, HOME_REF } from '../../resources/Refs';
+import { CAT_PICS, PSY_PAGE_HEADER } from '../../resources/PsychologistsViewerResources';
 import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
 
 //#endregion
@@ -63,12 +53,11 @@ const PsychologistsViewer = () => {
         <FormControl style={psychologistFormStyle}>
         <div className='root'>
             <div>
-                <NavigationBar />
                 <h2>{PSY_PAGE_HEADER}</h2>
             </div>
             <br/>
 
-            <Grid container spacing={1}>
+            <Grid container>
                 {cards.map((card, index) => {
                     const { 
                         image, 
