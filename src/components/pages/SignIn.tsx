@@ -44,6 +44,7 @@ import {
     validateInput,
     handleFocusInput
 } from '../common/Validation';
+import { SHA256 } from 'crypto-js';
 
 const defaultTheme = createTheme();
 
@@ -68,7 +69,7 @@ function SignIn() {
 
         console.log({
             email: email,
-            password: password,
+            password: SHA256(password).toString(),
             rememberMe: rememberMe
         });
     };
