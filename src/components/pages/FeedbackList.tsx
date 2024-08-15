@@ -44,7 +44,6 @@ function FeedbackList() {
                     <th>Дата отзыва</th>
                     <th>Telegram</th>
                     <th>Текст отзыва</th>
-                    <th>Номер заявки</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,7 +55,6 @@ function FeedbackList() {
                         <td>{moment(elem.feedbackDate).format('lll')}</td>
                         <td>{elem.telegram}</td>
                         <td style={tableFeedbackTextLineStyle}>{elem.feedbackText}</td>
-                        <td>{elem.questionnaireNumber}</td>
                     </tr>
                 )}            
             </tbody>            
