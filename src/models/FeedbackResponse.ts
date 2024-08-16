@@ -3,5 +3,4 @@ export interface FeedbackResponse {
     telegram: string;
     feedbackDate: string;
     feedbackText: string;
-    questionnaireNumber: string;
 }
