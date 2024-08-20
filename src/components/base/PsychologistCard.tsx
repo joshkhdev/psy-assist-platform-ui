@@ -1,3 +1,7 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { GET_PSYCHOLOGISTS_REF } from '../../resources/Refs';
+
 // MUI
 import { 
     Button,
@@ -27,6 +31,20 @@ interface Props {
 }
 
 const PsychologistCard = (props: Props) => {
+
+    const [image, setImage] = useState<string>();
+
+    useEffect(() => {
+        getImageAsync();
+    });
+
+    async function getImageAsync() {   
+        const response = await axios.post(`${GET_PSYCHOLOGISTS_REF}/${props.psyIndex}/content?type=1`); 
+        const data = JSON.parse(JSON.stringify(response.data));
+        console.log(data); 
+        setImage(data[0].fileContents);                
+    }
+
     return (
         <Card
             key={props.psyIndex} 
@@ -40,8 +58,8 @@ const PsychologistCard = (props: Props) => {
             <CardMedia
                 component='img'
                 alt='cat'
-                height='140'
-                image={props.psyImage} />
+                height='auto'
+                src={`data:image/png;base64, ${image}`} />
             
             <CardContent>
                 <Typography 
