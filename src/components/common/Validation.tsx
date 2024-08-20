@@ -1,4 +1,5 @@
 import { z as zodSchema } from 'zod';
+import {MIN_AGE, MAX_AGE} from '../../resources/ValidationResources';
 
 export const validateEmail = (email: string | null): boolean => {
     const result = zodSchema.string().email().safeParse(email);
@@ -73,4 +74,10 @@ export const handleFocusInput = (
 
     if (setVerify) 
         setVerify(true);
+};
+
+export const validateAge = (age: string | null): boolean => {
+    return age 
+        ? zodSchema.number().min(MIN_AGE).max(MAX_AGE).safeParse(Number(age)).success 
+        : false;
 };
