@@ -39,7 +39,7 @@ const PsychologistCard = (props: Props) => {
     });
 
     async function getImageAsync() {   
-        const response = await axios.post(`${GET_PSYCHOLOGISTS_REF}/${props.psyIndex}/content?type=1`); 
+        const response = await axios.get(`${GET_PSYCHOLOGISTS_REF}/${props.psyIndex}/content?type=1`); 
         const data = JSON.parse(JSON.stringify(response.data));
         setImage(data[0].fileContents);                
     }
