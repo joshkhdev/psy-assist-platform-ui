@@ -3,7 +3,6 @@ import {
     useEffect, 
     useState } from 'react';
 import axios from 'axios';
-import moment from 'moment';
 // MUI
 import { Link } from '@mui/material';
 // Classes
@@ -20,6 +19,11 @@ function FeedbackList() {
     // HOCs
     const [feedbacks, setFeedbacks] = useState<FeedbackResponse[]>();
     useEffect(() => { getFeedbackDataAsync(); }, []);
+    
+    // Functions
+    function formatDate(string: string | number | Date) {
+        return `${new Date(string).toLocaleDateString()} ${new Date(string).toLocaleTimeString()}`;
+    }
 
     // Actions
     async function getFeedbackDataAsync() {        
@@ -32,7 +36,7 @@ function FeedbackList() {
     const handleClick = (state: FeedbackResponse) => {
         console.log('feedback ', state);
         alert(state.feedbackText);
-    }      
+    }    
 
     // Table
     const contents = feedbacks === undefined
@@ -52,7 +56,7 @@ function FeedbackList() {
                         key={elem.id} 
                         onClick={() => handleClick(elem)}>                        
                         <td>{elem.id}</td>
-                        <td>{moment(elem.feedbackDate).format('lll')}</td>
+                        <td>{formatDate(elem.feedbackDate)}</td>
                         <td>{elem.telegram}</td>
                         <td style={tableFeedbackTextLineStyle}>{elem.feedbackText}</td>
                     </tr>
