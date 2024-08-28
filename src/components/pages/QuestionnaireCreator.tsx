@@ -52,15 +52,17 @@ import {
     TIMEZONE_INNER_HEADER 
 } from '../../resources/QuestionnaireCreatorResources';
 import { CREATE_QUE_SUCCESS_REF, HOME_REF, POST_QUESTIONNAIRE_REF } from '../../resources/Refs';
+import { validateAge } from '../common/Validation';
+import { INVALID_AGE_ERR } from '../../resources/ValidationResources';
 
 //#endregion
 
 const QuestionnaireCreator = () => {   
     // Constants
     const requestTimeout = 5000;
-    const maxAge = 151;
     
     // HOCs
+    const [ageIsValid, setAgeIsValid] = useState(false);
     const [questionnaire, setQuestionnaire] = useState<Partial<Questionnaire>>({});
     const navigate = useNavigate();
 
@@ -70,14 +72,22 @@ const QuestionnaireCreator = () => {
     };
 
     const onChangeAge = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const rule = /^[0-9\b]+$/;
-        if ((e.target.value === '' 
-            || rule.test(e.target.value))
-            && Number(e.target.value) < maxAge) {
-            setQuestionnaire({...questionnaire, age: Number(e.target.value) });
+        const age = e.target.value;
+
+        const isValid = validateAge(age);
+        
+        setAgeIsValid(isValid);
+
+        if (isValid) {
+            setQuestionnaire({...questionnaire, age: Number(age) });
+        } else {
+            setQuestionnaire({...questionnaire, age: undefined });
         }
-        else {
-            e.target.value = e.target.value.slice(0, -1);
+    }
+
+    const onBlurAge = () => {
+        if (!ageIsValid) {
+            alert(INVALID_AGE_ERR);
         }
     }
 
@@ -189,7 +199,8 @@ const QuestionnaireCreator = () => {
 
                 <AccordionDetails>
                     <TextField 
-                        label={AGE_INNER_HEADER} 
+                        label={AGE_INNER_HEADER}
+                        onBlur={onBlurAge}
                         onChange={onChangeAge} 
                         required
                         style={questionnaireEntryStyle}
