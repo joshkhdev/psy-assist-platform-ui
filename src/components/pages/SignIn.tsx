@@ -31,10 +31,12 @@ import {
     SIGN_IN_BUTTON,
     EMAIL_PLACEHOLDER,
     PASSWORD_PLACEHOLDER,
-    REMEMBER_ME_HEADER,
-    INCORRECT_EMAIL,
-    EMPTY_FIELD_ERROR
+    REMEMBER_ME_HEADER
 } from '../../resources/SignInUpResources';
+import {
+    INCORRECT_EMAIL_FORMAT_ERR,
+    EMPTY_FIELD_ERR
+} from '../../resources/ValidationResources';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
 import { HOME_REF, SIGN_UP_REF } from '../../resources/Refs';
@@ -105,7 +107,7 @@ function SignIn() {
                         error = {emailIsEmpty || !emailVerify}
                         fullWidth
                         id='email'
-                        helperText= {emailIsEmpty ? EMPTY_FIELD_ERROR : (emailVerify ? ' ' : INCORRECT_EMAIL)}
+                        helperText= {emailIsEmpty ? EMPTY_FIELD_ERR : (emailVerify ? ' ' : INCORRECT_EMAIL_FORMAT_ERR)}
                         label={EMAIL_PLACEHOLDER}
                         margin='normal'
                         name='email'
@@ -137,7 +139,7 @@ function SignIn() {
                             onChange={(e) => setPassword(e.target.value)}
                             onFocus={() => handleFocusInput(setPassword, setPasswordIsEmpty)}
                         />
-                        <FormHelperText error={passwordIsEmpty}>{passwordIsEmpty ? EMPTY_FIELD_ERROR : ' '}</FormHelperText>
+                        <FormHelperText error={passwordIsEmpty}>{passwordIsEmpty ? EMPTY_FIELD_ERR : ' '}</FormHelperText>
                         </FormControl>
                         
                         <FormControlLabel
