@@ -19,6 +19,7 @@ import SignUp from './components/pages/SignUp';
 import { 
   CREATE_QUESTIONNAIRE_REF, 
   CREATE_QUE_SUCCESS_REF, 
+  FEEDBACK_LIST_REF, 
   HOME_REF, 
   PSYCHOLOGIST_CATALOG_REF,
   QUESTIONNAIRE_LIST_REF,
@@ -26,6 +27,7 @@ import {
   SIGN_IN_REF,
   SIGN_UP_REF
 } from './resources/Refs';
+import FeedbackList from './components/pages/FeedbackList';
 
 //#endregion
 
@@ -43,6 +45,7 @@ function App() {
           <Route path={QUESTIONNAIRE_LIST_REF} element={<QuestionnairesList />} />
           <Route path={QUESTIONNAIRE_VIEW_REF} element={<QuestionnaireViewer />} />
           <Route path={SIGN_UP_REF} element={<SignUp />} />
+          <Route path={FEEDBACK_LIST_REF} element={<FeedbackList />} />
           <Route path='*' element={<Home />} />
         </Routes>
       </BrowserRouter>

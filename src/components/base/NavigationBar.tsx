@@ -4,11 +4,12 @@ import Navbar from 'react-bootstrap/esm/Navbar';
 
 import {
     CREATE_QUESTIONNAIRE_REF, 
+    FEEDBACK_LIST_REF, 
     HOME_REF, 
     PSYCHOLOGIST_CATALOG_REF,
     QUESTIONNAIRE_LIST_REF,
     SIGN_IN_REF,
-    SIGN_UP_REF
+    SIGN_UP_REF,
 } from '../../resources/Refs';
 
 function NavigationBar() {    
@@ -25,6 +26,7 @@ function NavigationBar() {
                 <Nav.Link href={PSYCHOLOGIST_CATALOG_REF}>Каталог психологов</Nav.Link>
                 <Nav.Link href={QUESTIONNAIRE_LIST_REF}>Список заявок</Nav.Link>
                 <Nav.Link href={SIGN_UP_REF}>Регистрация</Nav.Link>
+                <Nav.Link href={FEEDBACK_LIST_REF}>Просмотр отзывов</Nav.Link>
             </Nav>
             </Container>
         </Navbar>        
