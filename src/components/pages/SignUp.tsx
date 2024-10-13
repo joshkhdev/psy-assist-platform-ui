@@ -29,10 +29,12 @@ import {
   FIRST_NAME_PLACEHOLDER,
   LAST_NAME_PLACEHOLDER,
   EMAIL_PLACEHOLDER,
-  PASSWORD_PLACEHOLDER,
-  INCORRECT_EMAIL,
-  EMPTY_FIELD_ERROR
+  PASSWORD_PLACEHOLDER
 } from '../../resources/SignInUpResources';
+import {
+  INCORRECT_EMAIL_FORMAT_ERR,
+  EMPTY_FIELD_ERR
+} from '../../resources/ValidationResources';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { BACK_TO_HOME_BUTTON_HEADER } from '../../resources/CommonResources';
 import { HOME_REF, SIGN_IN_REF } from '../../resources/Refs';
@@ -109,7 +111,7 @@ function SignUp() {
               autoFocus
               error = {firstNameIsEmpty}
               fullWidth
-              helperText= {firstNameIsEmpty ? EMPTY_FIELD_ERROR : ' '}
+              helperText= {firstNameIsEmpty ? EMPTY_FIELD_ERR : ' '}
               id='firstName'
               label={FIRST_NAME_PLACEHOLDER}
               margin='normal'
@@ -125,7 +127,7 @@ function SignUp() {
               autoComplete='family-name'
               error = {lastNameIsEmpty}
               fullWidth
-              helperText= {lastNameIsEmpty ? EMPTY_FIELD_ERROR : ' '}
+              helperText= {lastNameIsEmpty ? EMPTY_FIELD_ERR : ' '}
               id='lastName'
               label={LAST_NAME_PLACEHOLDER}
               margin='normal'
@@ -139,7 +141,7 @@ function SignUp() {
               autoComplete='email'
               error = {emailIsEmpty || !emailVerify}
               fullWidth
-              helperText= {emailIsEmpty ? EMPTY_FIELD_ERROR : (emailVerify ? ' ' : INCORRECT_EMAIL)}
+              helperText= {emailIsEmpty ? EMPTY_FIELD_ERR : (emailVerify ? ' ' : INCORRECT_EMAIL_FORMAT_ERR)}
               id='email'
               label={EMAIL_PLACEHOLDER}
               margin='normal'
@@ -171,7 +173,7 @@ function SignUp() {
               onChange={(e) => setPassword(e.target.value)}
               onFocus={() => handleFocusInput(setPassword, setPasswordIsEmpty)}
             />
-            <FormHelperText error={passwordIsEmpty}>{passwordIsEmpty ? EMPTY_FIELD_ERROR : ' '}</FormHelperText>
+            <FormHelperText error={passwordIsEmpty}>{passwordIsEmpty ? EMPTY_FIELD_ERR : ' '}</FormHelperText>
             </FormControl>
           </Grid>
           <Button

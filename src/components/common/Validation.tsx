@@ -1,4 +1,5 @@
 import { z as zodSchema } from 'zod';
+import { isValidPhoneNumber } from "libphonenumber-js";
 import {MIN_AGE, MAX_AGE} from '../../resources/ValidationResources';
 
 export const validateEmail = (email: string | null): boolean => {
@@ -80,4 +81,15 @@ export const validateAge = (age: string | null): boolean => {
     return age 
         ? zodSchema.number().min(MIN_AGE).max(MAX_AGE).safeParse(Number(age)).success 
         : false;
+};
+
+export const validatePhone = (phoneNumber: string): boolean => {
+    return phoneNumber 
+        ? isValidPhoneNumber(phoneNumber.replace(/\s+/g, ''))
+        : false;
+};
+
+export const validateTelegram = (telegram: string | null): boolean => {
+    const telegramRegex = /^@[^\s]+/;
+    return telegram ? telegramRegex.test(telegram) : false;
 };
