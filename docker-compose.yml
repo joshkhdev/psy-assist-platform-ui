@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 'psy-assist-platform_ui'
+    restart: unless-stopped
+    ports:
+      - "5080:80"
+    environment:
+      - VITE_PAP_API_URL=http://localhost:5070
